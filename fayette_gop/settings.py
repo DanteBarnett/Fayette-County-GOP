@@ -1,41 +1,61 @@
-import os
-from pathlib import Path
-import dj_database_url
-from dotenv import load_dotenv
+"""
+Django settings for Fayette County GOP website
+Compatible with Django 5.0, Wagtail 6, Python 3.12
+"""
 
-load_dotenv()
+from pathlib import Path
+import environ
+
+# ------------------------------------------------------------------------------
+# Base paths
+# ------------------------------------------------------------------------------
 
 BASE_DIR = Path(__file__).resolve().parent.parent
+env = environ.Env(
+    # casting, default value
+    DJANGO_DEBUG=(bool, False),
+    ALLOWED_HOSTS=(list, ["localhost", "127.0.0.1"]),
+)
+# read .env if present
+env.read_env(BASE_DIR / ".env")
 
-SECRET_KEY = os.getenv("DJANGO_SECRET_KEY", "change-me")
-DEBUG = os.getenv("DJANGO_DEBUG", "1") == "1"
+# ------------------------------------------------------------------------------
+# Core settings
+# ------------------------------------------------------------------------------
 
-ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "*").split(",")
+SECRET_KEY = env("DJANGO_SECRET_KEY", default="change-me")
+DEBUG = env("DJANGO_DEBUG")
 
-# Application definition
+ALLOWED_HOSTS = env("ALLOWED_HOSTS")
+
+# ------------------------------------------------------------------------------
+# Applications
+# ------------------------------------------------------------------------------
+
 INSTALLED_APPS = [
+    # Django core
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    # Third-party
+    # 3rd-party
     "wagtail",
     "wagtail.admin",
     "wagtail.users",
     "wagtail.snippets",
     "wagtail.documents",
     "wagtail.images",
+    "wagtail.embeds",
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
-    "wagtail.embeds",
     "wagtail.contrib.sitemaps",
     "wagtailseo",
     "modelcluster",
     "taggit",
-    "django_serviceworker",
-    # Local
+    "pwa",                      # <-- replaces django_serviceworker
+    # project apps
     "home",
 ]
 
@@ -52,6 +72,11 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = "fayette_gop.urls"
+WSGI_APPLICATION = "fayette_gop.wsgi.application"
+
+# ------------------------------------------------------------------------------
+# Templates
+# ------------------------------------------------------------------------------
 
 TEMPLATES = [
     {
@@ -75,56 +100,83 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "fayette_gop.wsgi.application"
+# ------------------------------------------------------------------------------
+# Database (SQLite default; Postgres via DATABASE_URL)
+# ------------------------------------------------------------------------------
 
 DATABASES = {
-    "default": dj_database_url.parse(
-        os.getenv("DATABASE_URL", "sqlite:///" + str(BASE_DIR / "db.sqlite3")),
-        conn_max_age=600,
+    "default": env.db(
+        "DATABASE_URL",
+        default=f"sqlite:///{BASE_DIR / 'db.sqlite3'}",
     )
 }
+DATABASES["default"]["ATOMIC_REQUESTS"] = True
 
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
+# ------------------------------------------------------------------------------
+# Internationalisation
+# ------------------------------------------------------------------------------
 
 LANGUAGE_CODE = "en-us"
 TIME_ZONE = "America/New_York"
 USE_I18N = True
 USE_TZ = True
 
+# ------------------------------------------------------------------------------
+# Static & media
+# ------------------------------------------------------------------------------
+
 STATIC_URL = "/static/"
-STATIC_ROOT = BASE_DIR / "static"
-STATICFILES_DIRS = [BASE_DIR / "staticfiles"]
+STATIC_ROOT = BASE_DIR / "staticfiles"
+STATICFILES_DIRS = [BASE_DIR / "static"]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-
+# ------------------------------------------------------------------------------
 # Wagtail
-WAGTAIL_SITE_NAME = "Fayette GOP"
-WAGTAILADMIN_BASE_URL = os.getenv("WAGTAILADMIN_BASE_URL", "http://localhost:8000")
+# ------------------------------------------------------------------------------
 
+WAGTAIL_SITE_NAME = "Fayette GOP"
+WAGTAILADMIN_BASE_URL = env("WAGTAILADMIN_BASE_URL", default="http://localhost:8000")
+
+# ------------------------------------------------------------------------------
 # Email (SendGrid)
+# ------------------------------------------------------------------------------
+
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
-SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY", "")
+SENDGRID_API_KEY = env("SENDGRID_API_KEY", default="")
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
+# ------------------------------------------------------------------------------
 # Google Analytics
-GA_ID = os.getenv("GA_ID", "")
+# ------------------------------------------------------------------------------
 
-# Service Worker
-SERVICE_WORKER_PATH = BASE_DIR / "static" / "serviceworker.js"
+GA_ID = env("GA_ID", default="")
+
+# ------------------------------------------------------------------------------
+# PWA (django-pwa)
+# ------------------------------------------------------------------------------
+
+PWA_APP_NAME = "Fayette GOP"
+PWA_APP_SHORT_NAME = "FCGOP"
+PWA_APP_DESCRIPTION = "Official website of the Fayette County Republican Party"
+PWA_APP_THEME_COLOR = "#b40000"
+PWA_APP_BACKGROUND_COLOR = "#ffffff"
+PWA_APP_SCOPE = "/"
+PWA_SERVICE_WORKER_PATH = BASE_DIR / "static" / "service-worker.js"
+
+# ------------------------------------------------------------------------------
+# Security hardening (safe defaults, tweak in production)
+# ------------------------------------------------------------------------------
+
+CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[])
+SESSION_COOKIE_SECURE = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SECURE_HSTS_PRELOAD = not DEBUG
+SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
+SECURE_HSTS_SECONDS = 60 * 60 * 24 * 30  # 30 days
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

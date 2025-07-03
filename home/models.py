@@ -1,23 +1,29 @@
+"""
+home/models.py – Fayette County GOP
+Wagtail 6 · Django 5 · Python 3.12
+"""
 from django.db import models
 from django.utils import timezone
 
-from wagtail.admin.panels import FieldPanel, MultiFieldPanel
-from wagtail.fields import RichTextField, StreamField
-from wagtail.models import Page, Orderable
-from wagtail.snippets.models import register_snippet
 from wagtail import blocks as wagblocks
-from wagtail.images.blocks import ImageChooserBlock
+from wagtail.admin.panels import FieldPanel, MultiFieldPanel
 from wagtail.documents.blocks import DocumentChooserBlock
-from modelcluster.fields import ParentalKey
+from wagtail.fields import RichTextField, StreamField
+from wagtail.images.blocks import ImageChooserBlock
+from wagtail.models import Orderable, Page
+from wagtail.snippets.models import register_snippet
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
-from wagtail.contrib.settings.models import BaseSetting, register_setting
+from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
+from modelcluster.fields import ParentalKey
+from wagtail.embeds.blocks import EmbedBlock
 
-# ---------------------------------------------
-# 1. Global Site Settings
-# ---------------------------------------------
+
+# ──────────────────────────────────────────────────────────────────────────────
+# 1 – GLOBAL SITE SETTINGS
+# ──────────────────────────────────────────────────────────────────────────────
 @register_setting
-class SiteSettings(BaseSetting):
-    """Global site configuration editable in Wagtail Settings."""
+class SiteSettings(BaseSiteSetting):
+    """Editable via → Settings ▸ Site ► Fayette GOP"""
 
     title = models.CharField(max_length=255)
     tagline = models.CharField(max_length=255, blank=True)
@@ -26,15 +32,24 @@ class SiteSettings(BaseSetting):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name="site_hero_image",
+        related_name="+",
     )
     footer_blurb = models.TextField(blank=True)
-    social_links = StreamField([
-        ("link", wagblocks.StructBlock({
-            "label": wagblocks.CharBlock(),
-            "url": wagblocks.URLBlock(),
-        })),
-    ], blank=True, use_json_field=True)
+    social_links = StreamField(
+        [
+            (
+                "link",
+                wagblocks.StructBlock(
+                    [
+                        ("label", wagblocks.CharBlock()),
+                        ("url", wagblocks.URLBlock()),
+                    ]
+                ),
+            ),
+        ],
+        blank=True,
+        use_json_field=True,
+    )
 
     panels = [
         FieldPanel("title"),
@@ -44,12 +59,13 @@ class SiteSettings(BaseSetting):
         FieldPanel("social_links"),
     ]
 
-    def __str__(self):
+    def __str__(self) -> str:  # noqa: D401
         return self.title
 
-# ---------------------------------------------
-# 2. Home Page
-# ---------------------------------------------
+
+# ──────────────────────────────────────────────────────────────────────────────
+# 2 – HOME PAGE
+# ──────────────────────────────────────────────────────────────────────────────
 class HomePage(Page):
     hero_title = models.CharField(max_length=255, default="Fayette County GOP")
     hero_subtitle = models.CharField(max_length=255, blank=True)
@@ -58,16 +74,25 @@ class HomePage(Page):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name="home_hero_image",
+        related_name="+",
     )
 
     mission = RichTextField(blank=True)
-    cta_buttons = StreamField([
-        ("button", wagblocks.StructBlock([
-            ("label", wagblocks.CharBlock()),
-            ("link", wagblocks.URLBlock(required=False)),
-        ]))
-    ], blank=True, use_json_field=True)
+    cta_buttons = StreamField(
+        [
+            (
+                "button",
+                wagblocks.StructBlock(
+                    [
+                        ("label", wagblocks.CharBlock()),
+                        ("link", wagblocks.URLBlock(required=False)),
+                    ]
+                ),
+            )
+        ],
+        blank=True,
+        use_json_field=True,
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel("hero_title"),
@@ -80,28 +105,30 @@ class HomePage(Page):
     class Meta:
         verbose_name = "Home Page"
 
-# ---------------------------------------------
-# 3. Standard Page (About, Contact, etc.)
-# ---------------------------------------------
+
+# ──────────────────────────────────────────────────────────────────────────────
+# 3 – STANDARD PAGES (About, Contact, etc.)
+# ──────────────────────────────────────────────────────────────────────────────
 class StandardPage(Page):
-    body = StreamField([
-        ("heading", wagblocks.CharBlock(classname="full title")),
-        ("paragraph", wagblocks.RichTextBlock()),
-        ("image", ImageChooserBlock()),
-    ], use_json_field=True)
+    body = StreamField(
+        [
+            ("heading", wagblocks.CharBlock(classname="full title")),
+            ("paragraph", wagblocks.RichTextBlock()),
+            ("image", ImageChooserBlock()),
+        ],
+        use_json_field=True,
+    )
 
-    content_panels = Page.content_panels + [
-        FieldPanel("body"),
-    ]
+    content_panels = Page.content_panels + [FieldPanel("body")]
 
-# ---------------------------------------------
-# 4. Events
-# ---------------------------------------------
+
+# ──────────────────────────────────────────────────────────────────────────────
+# 4 – EVENTS
+# ──────────────────────────────────────────────────────────────────────────────
 class EventIndexPage(Page):
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [FieldPanel("intro")]
-
     subpage_types = ["home.EventPage"]
 
 
@@ -115,14 +142,14 @@ class EventPage(Page):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name="event_flyer",
+        related_name="+",
     )
     image = models.ForeignKey(
         "wagtailimages.Image",
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name="event_image",
+        related_name="+",
     )
     cta_link = models.URLField(blank=True)
 
@@ -138,14 +165,14 @@ class EventPage(Page):
 
     parent_page_types = ["home.EventIndexPage"]
 
-# ---------------------------------------------
-# 5. Blog
-# ---------------------------------------------
+
+# ──────────────────────────────────────────────────────────────────────────────
+# 5 – BLOG
+# ──────────────────────────────────────────────────────────────────────────────
 class BlogIndexPage(Page):
     intro = RichTextField(blank=True)
 
     content_panels = Page.content_panels + [FieldPanel("intro")]
-
     subpage_types = ["home.BlogPostPage"]
 
 
@@ -157,7 +184,7 @@ class BlogPostPage(Page):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name="blog_cover_image",
+        related_name="+",
     )
     body = RichTextField()
 
@@ -170,9 +197,10 @@ class BlogPostPage(Page):
 
     parent_page_types = ["home.BlogIndexPage"]
 
-# ---------------------------------------------
-# 6. Leadership
-# ---------------------------------------------
+
+# ──────────────────────────────────────────────────────────────────────────────
+# 6 – LEADERSHIP
+# ──────────────────────────────────────────────────────────────────────────────
 @register_snippet
 class Leader(models.Model):
     name = models.CharField(max_length=255)
@@ -182,7 +210,7 @@ class Leader(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name="leader_photo",
+        related_name="+",
     )
     email = models.EmailField(blank=True)
     bio = RichTextField(blank=True)
@@ -195,7 +223,7 @@ class Leader(models.Model):
         FieldPanel("bio"),
     ]
 
-    def __str__(self):
+    def __str__(self) -> str:  # noqa: D401
         return f"{self.name} — {self.role}"
 
 
@@ -205,35 +233,37 @@ class LeadershipPage(Page):
     class Meta:
         verbose_name = "Leadership Page"
 
-# ---------------------------------------------
-# 7. Gallery
-# ---------------------------------------------
+
+# ──────────────────────────────────────────────────────────────────────────────
+# 7 – GALLERY
+# ──────────────────────────────────────────────────────────────────────────────
 class GalleryItem(Orderable):
     page = ParentalKey("GalleryPage", related_name="items")
     title = models.CharField(max_length=255)
-    media = StreamField([
-        ("image", ImageChooserBlock()),
-        ("video", wagblocks.EmbedBlock()),
-    ], use_json_field=True)
+    media = StreamField(
+        [
+            ("image", ImageChooserBlock()),
+            ("video", EmbedBlock()),
+        ],
+        use_json_field=True,
+    )
 
-    panels = [
-        FieldPanel("title"),
-        FieldPanel("media"),
-    ]
+    panels = [FieldPanel("title"), FieldPanel("media")]
 
 
 class GalleryPage(Page):
-    title = models.CharField(max_length=255, default="Gallery")
+    template = "home/gallery_page.html"
+    subpage_types: list[str] = []
 
-    content_panels = Page.content_panels + []
+    class Meta:
+        verbose_name = "Gallery"
 
-    subpage_types = []
 
-# ---------------------------------------------
-# 8. Contact Page (Email Form)
-# ---------------------------------------------
+# ──────────────────────────────────────────────────────────────────────────────
+# 8 – CONTACT PAGE (email form)
+# ──────────────────────────────────────────────────────────────────────────────
 class FormField(AbstractFormField):
-    page = ParentalKey('ContactPage', on_delete=models.CASCADE, related_name='form_fields')
+    page = ParentalKey("ContactPage", on_delete=models.CASCADE, related_name="form_fields")
 
 
 class ContactPage(AbstractEmailForm):
@@ -246,17 +276,17 @@ class ContactPage(AbstractEmailForm):
     content_panels = AbstractEmailForm.content_panels + [
         FieldPanel("intro"),
         FieldPanel("thank_you_text"),
-        FieldPanel("from_address"),
-        FieldPanel("to_address"),
-        FieldPanel("subject"),
-        MultiFieldPanel([
-            FieldPanel("from_address"),
-            FieldPanel("to_address"),
-            FieldPanel("subject"),
-        ], heading="Email Settings"),
+        MultiFieldPanel(
+            [
+                FieldPanel("from_address"),
+                FieldPanel("to_address"),
+                FieldPanel("subject"),
+            ],
+            heading="Email Settings",
+        ),
     ]
 
-    def get_context(self, request):
-        context = super().get_context(request)
+    def get_context(self, request, *args, **kwargs):
+        context = super().get_context(request, *args, **kwargs)
         context["form"] = self.get_form(request.POST or None)
         return context
