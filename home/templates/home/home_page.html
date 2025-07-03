@@ -25,22 +25,22 @@
         {% for button in page.cta_buttons %}
           {% if forloop.first %}
             <a href="{{ button.value.link|default:'/contribute/' }}" 
-               class="hero-cta bg-patriot-red text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-transparent">
+               class="hero-cta bg-patriot-red text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-transparent">
               {{ button.value.label|default:"Contribute" }}
             </a>
           {% else %}
             <a href="{{ button.value.link|default:'/volunteer/' }}" 
-               class="hero-cta border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-navy-900 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent">
+               class="hero-cta border-2 border-white text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-white hover:text-navy-900 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent">
               {{ button.value.label|default:"Volunteer" }}
             </a>
           {% endif %}
         {% empty %}
           <a href="/contribute/" 
-             class="hero-cta bg-patriot-red text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-transparent">
+             class="hero-cta bg-patriot-red text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-transparent">
             Contribute
           </a>
           <a href="/volunteer/" 
-             class="hero-cta border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-navy-900 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent">
+             class="hero-cta border-2 border-white text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-white hover:text-navy-900 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent">
             Volunteer
           </a>
         {% endfor %}
@@ -73,7 +73,7 @@
         <div class="bg-gradient-to-br from-patriot-red to-red-700 rounded-2xl p-1 shadow-2xl">
           <div class="bg-white rounded-xl p-8 h-full">
             <div class="text-center space-y-6">
-              <div class="w-16 h-16 bg-patriot-red rounded-full flex items-center justify-center mx-auto">
+              <div class="w-12 h-12 bg-patriot-red rounded-full flex items-center justify-center mx-auto">
                 <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
                 </svg>
@@ -106,7 +106,7 @@
         <div class="relative preserve-3d group-hover:rotate-y-180 transition-transform duration-700">
           <div class="absolute inset-0 backface-hidden">
             <div class="bg-gradient-to-br from-navy-900 to-navy-700 rounded-2xl p-8 text-white h-64 flex flex-col justify-center items-center text-center shadow-2xl">
-              <div class="w-16 h-16 bg-patriot-red rounded-full flex items-center justify-center mb-4">
+              <div class="w-12 h-12 bg-patriot-red rounded-full flex items-center justify-center mb-4">
                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
                   <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
@@ -134,7 +134,7 @@
         <div class="relative preserve-3d group-hover:rotate-y-180 transition-transform duration-700">
           <div class="absolute inset-0 backface-hidden">
             <div class="bg-gradient-to-br from-navy-900 to-navy-700 rounded-2xl p-8 text-white h-64 flex flex-col justify-center items-center text-center shadow-2xl">
-              <div class="w-16 h-16 bg-patriot-red rounded-full flex items-center justify-center mb-4">
+              <div class="w-12 h-12 bg-patriot-red rounded-full flex items-center justify-center mb-4">
                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
                 </svg>
@@ -161,7 +161,7 @@
         <div class="relative preserve-3d group-hover:rotate-y-180 transition-transform duration-700">
           <div class="absolute inset-0 backface-hidden">
             <div class="bg-gradient-to-br from-navy-900 to-navy-700 rounded-2xl p-8 text-white h-64 flex flex-col justify-center items-center text-center shadow-2xl">
-              <div class="w-16 h-16 bg-patriot-red rounded-full flex items-center justify-center mb-4">
+              <div class="w-12 h-12 bg-patriot-red rounded-full flex items-center justify-center mb-4">
                 <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
                   <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
                 </svg>
@@ -198,10 +198,10 @@
         Together, we can build a stronger, more prosperous Fayette County for all families.
       </p>
       <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/volunteer/" class="bg-patriot-red text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+        <a href="/volunteer/" class="bg-patriot-red text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-2xl">
           Get Involved
         </a>
-        <a href="/events/" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-navy-900 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+        <a href="/events/" class="border-2 border-white text-white px-6 py-3 rounded-full text-base font-semibold hover:bg-white hover:text-navy-900 transform hover:scale-105 transition-all duration-300 shadow-2xl">
           Upcoming Events
         </a>
       </div>
