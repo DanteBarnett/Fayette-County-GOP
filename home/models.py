@@ -10,12 +10,15 @@ from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from modelcluster.fields import ParentalKey
 from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
+from wagtail.contrib.settings.models import BaseSetting, register_setting
 
 # ---------------------------------------------
 # 1. Global Site Settings
 # ---------------------------------------------
-@register_snippet
-class SiteSettings(models.Model):
+@register_setting
+class SiteSettings(BaseSetting):
+    """Global site configuration editable in Wagtail Settings."""
+
     title = models.CharField(max_length=255)
     tagline = models.CharField(max_length=255, blank=True)
     hero_image = models.ForeignKey(
@@ -23,22 +26,26 @@ class SiteSettings(models.Model):
         null=True,
         blank=True,
         on_delete=models.SET_NULL,
-        related_name="hero_image",
+        related_name="site_hero_image",
     )
     footer_blurb = models.TextField(blank=True)
+    social_links = StreamField([
+        ("link", wagblocks.StructBlock({
+            "label": wagblocks.CharBlock(),
+            "url": wagblocks.URLBlock(),
+        })),
+    ], blank=True, use_json_field=True)
 
     panels = [
         FieldPanel("title"),
         FieldPanel("tagline"),
         FieldPanel("hero_image"),
         FieldPanel("footer_blurb"),
+        FieldPanel("social_links"),
     ]
 
     def __str__(self):
         return self.title
-
-    class Meta:
-        verbose_name = "Site Settings"
 
 # ---------------------------------------------
 # 2. Home Page
