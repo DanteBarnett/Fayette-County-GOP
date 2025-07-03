@@ -85,5 +85,12 @@ python manage.py collectstatic --noinput
 ```
 Add the above two commands to your CI/CD pipeline before launching the app.
 
+For iterative development you can run the live SCSS watcher:
+```bash
+pip install libsass==0.22.0  # needed once
+python manage.py compilescss --verbosity 2 --watch
+```
+This recompiles on every save and places the CSS into `static/css/main.css`, which Django serves via `collectstatic`.
+
 ---
 © 2024 Fayette County Republican Party

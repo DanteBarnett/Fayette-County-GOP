@@ -17,6 +17,8 @@ from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from modelcluster.fields import ParentalKey
 from wagtail.embeds.blocks import EmbedBlock
 from wagtail.blocks import PageChooserBlock
+from wagtail.contrib.table_block.blocks import TableBlock
+from wagtail.code_block.blocks import CodeBlock
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -125,6 +127,8 @@ class StandardPage(Page):
             ("heading", wagblocks.CharBlock(classname="full title")),
             ("paragraph", wagblocks.RichTextBlock()),
             ("image", ImageChooserBlock()),
+            ("table", TableBlock()),
+            ("code", CodeBlock()),
         ],
         use_json_field=True,
     )
@@ -322,6 +326,8 @@ class MissionPage(Page):
             ("paragraph", wagblocks.RichTextBlock()),
             ("image", ImageChooserBlock()),
             ("quote", wagblocks.BlockQuoteBlock()),
+            ("table", TableBlock()),
+            ("code", CodeBlock()),
             ("document", DocumentChooserBlock()),
         ],
         blank=True,

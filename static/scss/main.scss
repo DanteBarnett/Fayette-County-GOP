@@ -138,7 +138,7 @@ body {
   justify-content: center;
   background: $white;
   z-index: 9999;
-  animation: splashFade 1s forwards 1s;
+  animation: splashFade 0.6s ease-in-out forwards 0.9s;
 }
 
 @keyframes splashFade {
@@ -155,5 +155,5 @@ body {
 }
 
 #splash img {
-  animation: splashLogo 0.8s ease-out forwards;
+  animation: splashLogo 0.7s cubic-bezier(0.25,0.8,0.25,1) forwards;
 }
