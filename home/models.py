@@ -290,3 +290,60 @@ class ContactPage(AbstractEmailForm):
         context = super().get_context(request, *args, **kwargs)
         context["form"] = self.get_form(request.POST or None)
         return context
+
+
+# ──────────────────────────────────────────────────────────────────────────────
+# 9 – MISSION & ISSUES PAGES
+# ──────────────────────────────────────────────────────────────────────────────
+class MissionPage(Page):
+    """Standalone mission page presented in two-column layout."""
+
+    hero_image = models.ForeignKey(
+        "wagtailimages.Image",
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+        related_name="+",
+    )
+    body = RichTextField(blank=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel("hero_image"),
+        FieldPanel("body"),
+    ]
+
+    template = "home/mission_page.html"
+
+    class Meta:
+        verbose_name = "Mission Page"
+
+
+class IssueBlock(wagblocks.StructBlock):
+    """Block representing a single top issue card."""
+
+    title = wagblocks.CharBlock()
+    description = wagblocks.TextBlock()
+    icon = wagblocks.CharBlock(help_text="Heroicon/Font Awesome class name", required=False)
+
+    class Meta:
+        icon = "warning"
+        label = "Issue"
+
+
+class IssuesPage(Page):
+    """Displays a list of top issues with flip-on-hover cards."""
+
+    intro = RichTextField(blank=True)
+    issues = StreamField([
+        ("issue", IssueBlock()),
+    ], use_json_field=True)
+
+    content_panels = Page.content_panels + [
+        FieldPanel("intro"),
+        FieldPanel("issues"),
+    ]
+
+    template = "home/issues_page.html"
+
+    class Meta:
+        verbose_name = "Issues Page"

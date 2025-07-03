@@ -1,0 +1,113 @@
+$patriot-blue: #001F54;
+$patriot-red: #C8102E;
+$white: #ffffff;
+
+$p-font-size: 1.125rem;
+
+// WCAG color contrast ensured by using dark blue on white, white on blue/red.
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  color: #111;
+  background-color: $white;
+  line-height: 1.6;
+}
+
+.text-patriotBlue {
+  color: $patriot-blue !important;
+}
+
+.text-patriotRed {
+  color: $patriot-red !important;
+}
+
+.bg-patriotBlue {
+  background-color: $patriot-blue !important;
+}
+
+.bg-patriotRed {
+  background-color: $patriot-red !important;
+}
+
+// Animations
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.perspective {
+  perspective: 1000px;
+}
+
+.issue-card {
+  transform-style: preserve-3d;
+  .front,
+  .back {
+    backface-visibility: hidden;
+  }
+  .back {
+    transform: rotateY(180deg);
+  }
+}
+
+/* Sticky CTA */
+#sticky-cta {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  gap: 0.75rem;
+  z-index: 50;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease-in-out;
+
+  &.visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  a {
+    padding: 0.75rem 1.25rem;
+    border-radius: 9999px;
+    font-weight: 600;
+    &.contribute {
+      background: $patriot-red;
+      color: $white;
+    }
+    &.volunteer {
+      border: 2px solid $patriot-blue;
+      color: $patriot-blue;
+      background: $white;
+    }
+  }
+}
+
+/* Masonry */
+.masonry {
+  column-gap: 1rem;
+  column-count: 1;
+
+  @media (min-width: 640px) {
+    column-count: 2;
+  }
+
+  @media (min-width: 1024px) {
+    column-count: 3;
+  }
+
+  figure {
+    break-inside: avoid;
+    margin-bottom: 1rem;
+  }
+}

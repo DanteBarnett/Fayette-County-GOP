@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
     <link href="{% static 'dist/tailwind.css' %}" rel="stylesheet" />
     <link rel="manifest" href="{% static 'manifest.json' %}" />
+    <link rel="stylesheet" href="{% static 'css/main.css' %}" />
     {% if GA_ID %}
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ GA_ID }}"></script>
@@ -27,9 +28,15 @@
       {% block content %}{% endblock %}
     </main>
 
+    <div id="sticky-cta">
+      <a href="/contribute/" class="contribute">Contribute</a>
+      <a href="/volunteer/" class="volunteer">Volunteer</a>
+    </div>
+
     {% include "partials/footer.html" %}
 
     <script type="module" src="{% static 'frontend/assets/index.js' %}"></script>
+    <script defer src="{% static 'js/main.js' %}"></script>
     <script>
       if ('serviceWorker' in navigator) {
         navigator.serviceWorker.register('/static/serviceworker.js');
