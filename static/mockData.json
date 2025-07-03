@@ -1,0 +1,28 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "2024 Campaign Kickoff",
+      "date": "2024-03-15T18:00:00",
+      "location": "Fayette County Courthouse"
+    },
+    {
+      "id": 2,
+      "title": "Monthly Meeting",
+      "date": "2024-04-02T19:00:00",
+      "location": "Community Center"
+    }
+  ],
+  "news": [
+    {
+      "title": "FCRP Announces Fundraiser",
+      "link": "https://example.com/news/fundraiser",
+      "isoDate": "2024-02-01T12:00:00"
+    },
+    {
+      "title": "Voter Registration Drive Success",
+      "link": "https://example.com/news/drive",
+      "isoDate": "2024-01-20T12:00:00"
+    }
+  ]
+}

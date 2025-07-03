@@ -61,11 +61,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: 'pnpm'
       - name: Install pnpm
         run: npm install -g pnpm
-      - name: Install deps & lint
-        working-directory: frontend
-        run: |
-          pnpm install
-          pnpm exec eslint . --ext .ts,.tsx
-          pnpm run build
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm test -- --run
+      - run: pnpm build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist
