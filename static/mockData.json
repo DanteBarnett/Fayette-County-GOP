@@ -1,0 +1,34 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Monthly Meeting",
+      "date": "2024-07-15T18:30:00Z",
+      "location": "Courthouse Square",
+      "excerpt": "Join us for our monthly gathering to discuss county issues."
+    },
+    {
+      "id": 2,
+      "title": "Fundraising Dinner",
+      "date": "2024-08-05T23:00:00Z",
+      "location": "Community Center",
+      "excerpt": "Support the party while enjoying a catered dinner."
+    }
+  ],
+  "news": [
+    {
+      "id": 101,
+      "title": "County GOP Announces New Initiative",
+      "publishedAt": "2024-06-01",
+      "link": "https://example.com/news/initiative",
+      "image": "https://picsum.photos/seed/initiative/600/400"
+    },
+    {
+      "id": 102,
+      "title": "Success at Annual Picnic",
+      "publishedAt": "2024-05-20",
+      "link": "https://example.com/news/picnic",
+      "image": "https://picsum.photos/seed/picnic/600/400"
+    }
+  ]
+}

@@ -1,0 +1,56 @@
+{
+  "name": "fayette-county-gop",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite dev --open",
+    "build": "vite build",
+    "preview": "vite preview",
+    "lint": "eslint \"src/**/*.{ts,tsx}\" --max-warnings 0",
+    "format": "prettier --write .",
+    "test": "vitest",
+    "prepare": "husky install"
+  },
+  "dependencies": {
+    "@headlessui/react": "^1.7.18",
+    "classnames": "^2.3.3",
+    "framer-motion": "^10.16.6",
+    "gsap": "^3.12.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.23.0",
+    "supabase": "^2.54.0",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^6.4.1",
+    "@testing-library/react": "^14.2.2",
+    "@types/react": "^18.2.55",
+    "@types/react-dom": "^18.2.17",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "@vitejs/plugin-react": "^4.2.1",
+    "autoprefixer": "^10.4.17",
+    "eslint": "^8.57.0",
+    "eslint-plugin-jsx-a11y": "^6.8.0",
+    "eslint-plugin-react": "^7.34.1",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "husky": "^8.0.3",
+    "lint-staged": "^15.2.2",
+    "postcss": "^8.4.38",
+    "prettier": "^3.2.5",
+    "tailwindcss": "^3.4.4",
+    "typescript": "^5.4.0",
+    "vite": "^5.2.0",
+    "vite-plugin-pwa": "^0.18.4",
+    "vitest": "^0.34.6"
+  },
+  "lint-staged": {
+    "src/**/*.{ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.{md,json,yml,yaml}": "prettier --write"
+  }
+}
