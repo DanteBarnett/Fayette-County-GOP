@@ -1,9 +1,9 @@
-THIS SHOULD BE A LINTER ERROR{% extends "base.html" %}
+{% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags %}
 {% block content %}
 <section class="container mx-auto py-16 px-4">
   <h2 class="text-3xl font-bold text-center mb-12">Gallery</h2>
-  <div class="columns-1 sm:columns-2 md:columns-3 gap-4 [&>figure]:mb-4">
+  <div class="masonry" id="gallery">
     {% for item in page.items.all %}
     <figure class="break-inside-avoid">
       {% for block in item.media %}
