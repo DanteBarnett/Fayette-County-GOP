@@ -1,0 +1,113 @@
+{
+  "events": [
+    {
+      "id": 1,
+      "title": "Monthly Meeting",
+      "date": "2024-01-15",
+      "time": "19:00",
+      "location": "County Community Center",
+      "description": "Join us for our monthly meeting to discuss upcoming initiatives and hear from local candidates.",
+      "type": "meeting",
+      "image": "/assets/images/event-meeting.jpg"
+    },
+    {
+      "id": 2,
+      "title": "Volunteer Training",
+      "date": "2024-01-22",
+      "time": "18:00",
+      "location": "GOP Headquarters",
+      "description": "Learn how to effectively canvass, phone bank, and support our candidates.",
+      "type": "training",
+      "image": "/assets/images/event-training.jpg"
+    },
+    {
+      "id": 3,
+      "title": "Lincoln Day Dinner",
+      "date": "2024-02-12",
+      "time": "18:30",
+      "location": "Grand Ballroom",
+      "description": "Our annual fundraising dinner featuring keynote speakers and awards ceremony.",
+      "type": "fundraiser",
+      "image": "/assets/images/event-dinner.jpg"
+    },
+    {
+      "id": 4,
+      "title": "Voter Registration Drive",
+      "date": "2024-02-20",
+      "time": "10:00",
+      "location": "Various Locations",
+      "description": "Help register new voters and ensure our community is ready for the upcoming elections.",
+      "type": "outreach",
+      "image": "/assets/images/event-registration.jpg"
+    }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "title": "County Commission Approves New Business Development Zone",
+      "excerpt": "The Fayette County Commission voted unanimously to approve a new business development zone that will bring jobs and economic growth to our community.",
+      "content": "In a landmark decision, the Fayette County Commission voted unanimously to approve a new business development zone...",
+      "date": "2024-01-10",
+      "author": "John Smith",
+      "category": "Economic Development",
+      "image": "/assets/images/news-development.jpg",
+      "tags": ["economy", "business", "development"]
+    },
+    {
+      "id": 2,
+      "title": "Local Republicans Lead Voter Registration Drive",
+      "excerpt": "Over 500 new voters registered during last weekend's successful voter registration drive organized by the Fayette County GOP.",
+      "content": "The Fayette County Republican Party's voter registration drive exceeded all expectations...",
+      "date": "2024-01-08",
+      "author": "Jane Doe",
+      "category": "Community",
+      "image": "/assets/images/news-registration.jpg",
+      "tags": ["voting", "community", "outreach"]
+    },
+    {
+      "id": 3,
+      "title": "State Representative Visits Fayette County Schools",
+      "excerpt": "State Rep. Mike Johnson toured local schools to discuss education reform and hear directly from teachers, parents, and students.",
+      "content": "State Representative Mike Johnson spent the day visiting three Fayette County schools...",
+      "date": "2024-01-05",
+      "author": "Bob Wilson",
+      "category": "Education",
+      "image": "/assets/images/news-education.jpg",
+      "tags": ["education", "schools", "policy"]
+    }
+  ],
+  "gallery": [
+    {
+      "id": 1,
+      "title": "Lincoln Day Dinner 2023",
+      "description": "Annual fundraising dinner celebrating our heritage",
+      "images": [
+        {
+          "id": "ld-1",
+          "src": "/assets/images/gallery/lincoln-dinner-1.jpg",
+          "thumbnail": "/assets/images/gallery/thumbs/lincoln-dinner-1.jpg",
+          "alt": "Keynote speaker at Lincoln Day Dinner"
+        },
+        {
+          "id": "ld-2",
+          "src": "/assets/images/gallery/lincoln-dinner-2.jpg",
+          "thumbnail": "/assets/images/gallery/thumbs/lincoln-dinner-2.jpg",
+          "alt": "Award ceremony at Lincoln Day Dinner"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Community BBQ 2023",
+      "description": "Bringing neighbors together for food and fellowship",
+      "images": [
+        {
+          "id": "bbq-1",
+          "src": "/assets/images/gallery/bbq-1.jpg",
+          "thumbnail": "/assets/images/gallery/thumbs/bbq-1.jpg",
+          "alt": "Community members enjoying BBQ"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply antialiased;
+  }
+
+  /* Custom focus styles for accessibility */
+  *:focus {
+    @apply outline-none;
+  }
+
+  *:focus-visible {
+    @apply ring-2 ring-patriot-red ring-offset-2;
+  }
+
+  /* Skip to content link */
+  .skip-to-content {
+    @apply absolute -top-40 left-0 bg-patriot-navy text-white px-6 py-3 z-50;
+    @apply focus:top-4;
+  }
+}
+
+@layer components {
+  /* Loading spinner */
+  .spinner {
+    @apply w-16 h-16 border-4 border-gray-200 border-t-patriot-red rounded-full animate-spin;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-patriot-navy to-patriot-red bg-clip-text text-transparent;
+  }
+
+  /* Button base styles */
+  .btn {
+    @apply inline-flex items-center justify-center px-6 py-3 font-semibold rounded-md;
+    @apply transition-all duration-200 ease-in-out;
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2;
+  }
+
+  .btn-primary {
+    @apply btn bg-patriot-red text-white hover:bg-patriot-redHover;
+    @apply focus-visible:ring-patriot-red;
+  }
+
+  .btn-secondary {
+    @apply btn bg-white text-patriot-navy border-2 border-patriot-navy;
+    @apply hover:bg-patriot-navy hover:text-white;
+    @apply focus-visible:ring-patriot-navy;
+  }
+
+  /* Card hover effects */
+  .card-hover {
+    @apply transform transition-all duration-300;
+    @apply hover:scale-105 hover:shadow-xl;
+  }
+
+  /* Section padding */
+  .section-padding {
+    @apply px-4 sm:px-6 lg:px-8 xl:px-12;
+  }
+
+  /* Container */
+  .container-custom {
+    @apply max-w-7xl mx-auto;
+  }
+}
+
+@layer utilities {
+  /* Text balance for better readability */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Parallax effect */
+  .parallax {
+    will-change: transform;
+  }
+
+  /* Mask gradient */
+  .mask-gradient {
+    -webkit-mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+    mask-image: linear-gradient(to bottom, transparent, black 20%, black 80%, transparent);
+  }
+}
