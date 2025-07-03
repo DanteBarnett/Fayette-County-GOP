@@ -1,0 +1,24 @@
+<nav class="bg-white shadow fixed w-full z-30">
+  <div class="container mx-auto px-4 py-3 flex items-center justify-between">
+    <a href="/" class="text-patriotBlue font-bold text-xl">Fayette GOP</a>
+    <button id="nav-toggle" class="md:hidden text-patriotBlue focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" />
+      </svg>
+    </button>
+    <ul id="nav-menu" class="hidden md:flex space-x-8 font-medium">
+      <li><a href="/about/" class="hover:text-patriotRed">About</a></li>
+      <li><a href="/events/" class="hover:text-patriotRed">Events</a></li>
+      <li><a href="/news/" class="hover:text-patriotRed">News</a></li>
+      <li><a href="/gallery/" class="hover:text-patriotRed">Gallery</a></li>
+      <li><a href="/contact/" class="hover:text-patriotRed">Contact</a></li>
+    </ul>
+  </div>
+  <script>
+    const toggle = document.getElementById('nav-toggle');
+    const menu = document.getElementById('nav-menu');
+    if (toggle) {
+      toggle.addEventListener('click', () => menu.classList.toggle('hidden'));
+    }
+  </script>
+</nav>

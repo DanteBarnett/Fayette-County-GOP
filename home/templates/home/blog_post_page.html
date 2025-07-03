@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+<article class="container mx-auto py-16 px-4 max-w-3xl">
+  {% if page.cover_image %}{% image page.cover_image original class="w-full rounded-lg mb-8" %}{% endif %}
+  <h1 class="text-4xl font-bold">{{ page.title }}</h1>
+  <p class="mt-2 text-gray-600">{{ page.published_at|date:"F j, Y" }} • By {{ page.author }}</p>
+  <div class="prose mt-6">{{ page.body|richtext }}</div>
+  <div class="mt-8">
+    <!-- Simple share buttons -->
+    <span class="font-semibold mr-2">Share:</span>
+    <a href="https://www.facebook.com/sharer/sharer.php?u={{ request.build_absolute_uri }}" class="text-patriotBlue hover:text-patriotRed" target="_blank" rel="noopener">Facebook</a>
+    <span class="mx-1">|</span>
+    <a href="https://twitter.com/intent/tweet?url={{ request.build_absolute_uri }}&text={{ page.title }}" class="text-patriotBlue hover:text-patriotRed" target="_blank" rel="noopener">Twitter</a>
+  </div>
+</article>
+{% endblock %}

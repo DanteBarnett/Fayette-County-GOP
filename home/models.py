@@ -9,6 +9,7 @@ from wagtail import blocks as wagblocks
 from wagtail.images.blocks import ImageChooserBlock
 from wagtail.documents.blocks import DocumentChooserBlock
 from modelcluster.fields import ParentalKey
+from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 
 # ---------------------------------------------
 # 1. Global Site Settings
@@ -220,3 +221,35 @@ class GalleryPage(Page):
     content_panels = Page.content_panels + []
 
     subpage_types = []
+
+# ---------------------------------------------
+# 8. Contact Page (Email Form)
+# ---------------------------------------------
+class FormField(AbstractFormField):
+    page = ParentalKey('ContactPage', on_delete=models.CASCADE, related_name='form_fields')
+
+
+class ContactPage(AbstractEmailForm):
+    template = "home/contact_page.html"
+    landing_page_template = "home/contact_page.html"
+
+    intro = RichTextField(blank=True)
+    thank_you_text = RichTextField(blank=True)
+
+    content_panels = AbstractEmailForm.content_panels + [
+        FieldPanel("intro"),
+        FieldPanel("thank_you_text"),
+        FieldPanel("from_address"),
+        FieldPanel("to_address"),
+        FieldPanel("subject"),
+        MultiFieldPanel([
+            FieldPanel("from_address"),
+            FieldPanel("to_address"),
+            FieldPanel("subject"),
+        ], heading="Email Settings"),
+    ]
+
+    def get_context(self, request):
+        context = super().get_context(request)
+        context["form"] = self.get_form(request.POST or None)
+        return context

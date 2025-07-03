@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags %}
+{% block content %}
+<section class="container mx-auto py-16 px-4">
+  <h2 class="text-3xl font-bold mb-6">Upcoming Events</h2>
+  <div class="space-y-8">
+    {% for event in page.get_children.live.order_by('start_date') %}
+      {% with event=event.specific %}
+      <article class="bg-white shadow rounded-lg p-6 flex flex-col md:flex-row md:items-center">
+        <div class="flex-1">
+          <h3 class="text-2xl font-semibold"><a href="{{ event.url }}">{{ event.title }}</a></h3>
+          <p class="text-sm text-gray-600 mt-1">{{ event.start_date|date:"F j, Y g:i A" }}</p>
+          <p class="mt-2">{{ event.description|richtext }}</p>
+        </div>
+        {% if event.image %}
+          <div class="md:ml-6 mt-4 md:mt-0 w-48">{% image event.image fill-300x200 class="rounded-lg" %}</div>
+        {% endif %}
+      </article>
+      {% endwith %}
+    {% empty %}
+      <p>No upcoming events.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
