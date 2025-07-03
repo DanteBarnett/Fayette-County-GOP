@@ -11,6 +11,8 @@ export default function NavBar() {
         <button
           onClick={() => setOpen((o) => !o)}
           className="md:hidden text-patriotBlue focus:outline-none"
+          aria-controls="primary-navigation"
+          aria-expanded={open}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -24,7 +26,8 @@ export default function NavBar() {
           </svg>
         </button>
         <ul
-          className={`${open ? '' : 'hidden'} md:flex space-x-8 font-medium`}
+          id="primary-navigation"
+          className={`${open ? 'block' : 'hidden'} md:flex space-x-8 font-medium`}
         >
           <li>
             <a href="/about/" className="hover:text-patriotRed">
