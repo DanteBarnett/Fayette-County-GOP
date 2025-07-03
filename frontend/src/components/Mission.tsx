@@ -1,4 +1,4 @@
-interface MissionProps {
+export interface MissionProps {
   html: string
 }
 
