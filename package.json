@@ -53,7 +53,9 @@
     "vite": "^5.0.8",
     "vite-plugin-pwa": "^0.16.0",
     "vitest": "^0.34.0",
-    "only-allow": "^1.2.1"
+    "only-allow": "^1.2.1",
+    "@types/jest": "^29.5.4",
+    "@types/testing-library__react": "^13.0.4"
   },
   "lint-staged": {
     "*.{ts,tsx,css,md,json}": [

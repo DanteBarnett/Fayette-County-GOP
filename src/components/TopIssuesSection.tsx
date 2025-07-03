@@ -1,3 +1,4 @@
+import React from 'react';
 import Container from './ui/Container';
 import { motion } from 'framer-motion';
 
