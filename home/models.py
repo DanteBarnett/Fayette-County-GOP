@@ -306,7 +306,7 @@ class ContactPage(AbstractEmailForm):
 # 9 – MISSION & ISSUES PAGES
 # ──────────────────────────────────────────────────────────────────────────────
 class MissionPage(Page):
-    """Standalone mission page presented in two-column layout."""
+    """Mission page with rich StreamField content."""
 
     hero_image = models.ForeignKey(
         "wagtailimages.Image",
@@ -315,7 +315,18 @@ class MissionPage(Page):
         on_delete=models.SET_NULL,
         related_name="+",
     )
-    body = RichTextField(blank=True)
+
+    body = StreamField(
+        [
+            ("heading", wagblocks.CharBlock(classname="full title")),
+            ("paragraph", wagblocks.RichTextBlock()),
+            ("image", ImageChooserBlock()),
+            ("quote", wagblocks.BlockQuoteBlock()),
+            ("document", DocumentChooserBlock()),
+        ],
+        blank=True,
+        use_json_field=True,
+    )
 
     content_panels = Page.content_panels + [
         FieldPanel("hero_image"),
@@ -329,11 +340,13 @@ class MissionPage(Page):
 
 
 class IssueBlock(wagblocks.StructBlock):
-    """Block representing a single top issue card."""
+    """Block representing a single top-issue card."""
 
     title = wagblocks.CharBlock()
-    description = wagblocks.TextBlock()
-    icon = wagblocks.CharBlock(help_text="Heroicon/Font Awesome class name", required=False)
+    description = wagblocks.RichTextBlock()
+    icon = wagblocks.CharBlock(help_text="CSS class for icon", required=False)
+    link = wagblocks.URLBlock(required=False, help_text="Optional learn-more link")
+    background_color = wagblocks.CharBlock(required=False, help_text="Hex color override")
 
     class Meta:
         icon = "warning"

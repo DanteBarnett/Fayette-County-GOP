@@ -147,3 +147,13 @@ body {
     visibility: hidden;
   }
 }
+
+@keyframes splashLogo {
+  0% { transform: scale(0.6); opacity: 0; }
+  70% { transform: scale(1.05); opacity: 1; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+#splash img {
+  animation: splashLogo 0.8s ease-out forwards;
+}

@@ -76,5 +76,14 @@ create table news (
 
 The site is a fully-featured PWA so < 100% uptime is possible thanks to offline cache.
 
+### SCSS build
+
+To compile SCSS via django-sass-processor during development:
+```bash
+python manage.py compilescss   # writes static/css/main.css
+python manage.py collectstatic --noinput
+```
+Add the above two commands to your CI/CD pipeline before launching the app.
+
 ---
 © 2024 Fayette County Republican Party
