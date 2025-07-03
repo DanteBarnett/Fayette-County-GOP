@@ -1,10 +1,18 @@
 {% extends "base.html" %}
 {% load wagtailcore_tags wagtailimages_tags static %}
 
-{% block content %}
+{# Determine hero background image URL #}
+{% if page.hero_image %}
+  {% image page.hero_image original as hero_img %}
+  {% with hero_bg=hero_img.url %}
+{% else %}
+  {% static 'img/hero.jpg' as default_hero %}
+  {% with hero_bg=default_hero %}
+{% endif %}
+
 <!-- Hero Section -->
 <section class="hero-section relative bg-cover bg-center min-h-screen flex items-center justify-center text-center overflow-hidden" 
-         style="background-image: linear-gradient(rgba(30, 58, 138, 0.7), rgba(55, 48, 163, 0.6)), url('{% if page.hero_image %}{% image page.hero_image original as hero %}{{ hero.url }}{% else %}{% static 'img/hero.jpg' %}{% endif %}');">
+         style="background-image: linear-gradient(rgba(30, 58, 138, 0.7), rgba(55, 48, 163, 0.6)), url('{{ hero_bg }}');">
   <div class="absolute inset-0 bg-gradient-to-br from-navy-900/70 via-navy-800/60 to-navy-700/50"></div>
   
   <div class="relative z-10 container mx-auto px-6 text-white">
@@ -322,4 +330,5 @@ document.addEventListener('DOMContentLoaded', function() {
   });
 });
 </script>
+{% endwith %}
 {% endblock %}
