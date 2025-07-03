@@ -5,7 +5,7 @@
 {% if page.hero_image %}
   <section class="hero" style="background-image: url('{{ page.hero_image.url }}');">
 {% else %}
-  <section class="hero" style="background-image: url('{% static "img/hero.jpg" %}');">
+  <section class="hero" style="background-image: url('{% static 'img/hero.jpg' %}');">
 {% endif %}
     <div class="hero-overlay"></div>
     <div class="hero-inner">
