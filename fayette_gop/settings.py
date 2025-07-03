@@ -69,6 +69,7 @@ TEMPLATES = [
                 "django.template.context_processors.tz",
                 "django.contrib.messages.context_processors.messages",
                 "wagtail.contrib.settings.context_processors.settings",
+                "fayette_gop.context_processors.analytics",
             ],
         },
     },
@@ -121,6 +122,9 @@ WAGTAILADMIN_BASE_URL = os.getenv("WAGTAILADMIN_BASE_URL", "http://localhost:800
 EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = os.getenv("SENDGRID_API_KEY", "")
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
+
+# Google Analytics
+GA_ID = os.getenv("GA_ID", "")
 
 # Service Worker
 SERVICE_WORKER_PATH = BASE_DIR / "static" / "serviceworker.js"

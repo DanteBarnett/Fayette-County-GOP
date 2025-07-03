@@ -7,6 +7,16 @@
     <title>{% block title %}Fayette County GOP{% endblock %}</title>
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
     <link href="{% static 'dist/tailwind.css' %}" rel="stylesheet" />
+    <link rel="manifest" href="{% static 'manifest.json' %}" />
+    {% if GA_ID %}
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id={{ GA_ID }}"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);} gtag('js', new Date());
+      gtag('config', '{{ GA_ID }}');
+    </script>
+    {% endif %}
   </head>
   <body class="font-montserrat antialiased text-gray-900">
     <a href="#content" class="sr-only focus:not-sr-only">Skip to content</a>
@@ -20,5 +30,10 @@
     {% include "partials/footer.html" %}
 
     <script type="module" src="{% static 'frontend/assets/index.js' %}"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('/static/serviceworker.js');
+      }
+    </script>
   </body>
 </html>

@@ -8,3 +8,4 @@ whitenoise==6.6.0
 wagtail-seo==6.0.0
 django-sendgrid-v5==0.9.4
 django-serviceworker==1.0.1
+requests==2.31.0

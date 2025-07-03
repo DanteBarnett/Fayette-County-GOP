@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "module": "CommonJS",
+    "esModuleInterop": true,
+    "target": "ESNext",
+    "types": ["node"]
+  },
+  "include": ["../vite.config.js"]
+}

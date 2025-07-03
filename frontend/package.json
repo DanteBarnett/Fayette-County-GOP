@@ -23,6 +23,12 @@
     "vite": "^5.2.0",
     "@types/node": "^20.11.21",
     "@types/framer-motion": "^7.0.6",
-    "@tailwindcss/line-clamp": "^0.5.3"
+    "@tailwindcss/line-clamp": "^0.5.3",
+    "eslint": "^8.56.0",
+    "@typescript-eslint/parser": "^6.17.0",
+    "@typescript-eslint/eslint-plugin": "^6.17.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-config-prettier": "^9.1.0",
+    "prettier": "^3.1.1"
   }
 }

@@ -4,10 +4,12 @@ from django.contrib import admin
 from django.urls import path, include
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtail_docs_urls
+from home.feeds import LatestPostsFeed
 
 urlpatterns = [
     path("django-admin/", admin.site.urls),
     path("documents/", include(wagtail_docs_urls)),
+    path("blog/rss.xml", LatestPostsFeed(), name="rss_feed"),
 
     # Wagtail front-end pages
     path("", include(wagtail_urls)),
