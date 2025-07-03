@@ -25,7 +25,7 @@ RUN pip install --no-cache-dir -r requirements.txt
 COPY . .
 
 # copy built frontend assets into Django static dir
-COPY --from=frontend-build /app/frontend/dist /app/static/frontend
+COPY --from=frontend-build /app/dist /app/static/frontend
 
 # collectstatic at build time
 RUN python manage.py collectstatic --noinput
