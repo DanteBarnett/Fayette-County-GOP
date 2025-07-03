@@ -16,6 +16,7 @@ from wagtail.contrib.forms.models import AbstractEmailForm, AbstractFormField
 from wagtail.contrib.settings.models import BaseSiteSetting, register_setting
 from modelcluster.fields import ParentalKey
 from wagtail.embeds.blocks import EmbedBlock
+from wagtail.blocks import PageChooserBlock
 
 
 # ──────────────────────────────────────────────────────────────────────────────
@@ -94,12 +95,21 @@ class HomePage(Page):
         use_json_field=True,
     )
 
+    sections = StreamField([
+        ("mission", PageChooserBlock(target_model="home.MissionPage", icon="info")),
+        ("issues", PageChooserBlock(target_model="home.IssuesPage", icon="warning")),
+        ("events", PageChooserBlock(target_model="home.EventIndexPage", icon="date")),
+        ("news", PageChooserBlock(target_model="home.BlogIndexPage", icon="doc-full")),
+        ("gallery", PageChooserBlock(target_model="home.GalleryPage", icon="image")),
+    ], blank=True, use_json_field=True)
+
     content_panels = Page.content_panels + [
         FieldPanel("hero_title"),
         FieldPanel("hero_subtitle"),
         FieldPanel("hero_image"),
         FieldPanel("mission"),
         FieldPanel("cta_buttons"),
+        FieldPanel("sections"),
     ]
 
     class Meta:
