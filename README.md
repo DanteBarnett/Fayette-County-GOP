@@ -92,5 +92,12 @@ python manage.py compilescss --verbosity 2 --watch
 ```
 This recompiles on every save and places the CSS into `static/css/main.css`, which Django serves via `collectstatic`.
 
+For production builds (CI/containers) run:
+```bash
+python manage.py compilescss --settings=fayette_gop.settings
+python manage.py collectstatic --noinput
+```
+Ensure `sass_processor.finders.CssFinder` is in `STATICFILES_FINDERS` (already set in settings.py).
+
 ---
 © 2024 Fayette County Republican Party
