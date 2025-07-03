@@ -85,3 +85,24 @@ pnpm build && aws s3 sync dist s3://$S3_BUCKET --delete && \
 ```
 
 You can also hook the build output to **AWS Amplify** by pointing the Amplify Console at this repository – the default build command (`pnpm build`) and output directory (`dist`) are auto-detected.
+
+## PWA Assets
+
+Every size & format required by modern browsers is pre-generated in `public/`:
+
+* `favicon-16x16.png`, `favicon-32x32.png`, `favicon.ico`
+* `pwa-192x192.png`, `pwa-512x512.png` (maskable)
+* `apple-touch-icon.png` (180×180)
+* `favicon.svg`, `masked-icon.svg`
+
+Update the SVG or PNGs with your own branding to instantly refresh all favicons.
+
+## Husky pre-commit
+
+Local Git hooks are installed automatically after dependencies are installed (`pnpm i`) thanks to the `prepare` script:
+
+```bash
+husky install          # run automatically
+```
+
+The `pre-commit` hook runs ESLint, Prettier formatting, and unit tests to keep the `main` branch green.

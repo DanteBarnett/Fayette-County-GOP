@@ -1,3 +1,4 @@
+/// <reference lib="webworker" />
 /* eslint-disable no-underscore-dangle */
 import { precacheAndRoute } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
@@ -31,3 +32,5 @@ registerRoute(
   ({ url }) => url.origin.includes('fonts.googleapis.com') || url.origin.includes('cdnjs'),
   new StaleWhileRevalidate({ cacheName: 'cdn-cache' }),
 );
+
+export {}
