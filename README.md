@@ -56,3 +56,32 @@ The app is **zero-config** on AWS Amplify or an S3 + CloudFront static site.
 ## CI / CD
 
 A GitHub Actions workflow runs lint, test, and build on every push to `main`, then uploads the production artifact.
+
+## Continuous Integration & Deployment
+
+A GitHub Actions workflow (`.github/workflows/ci.yml`) automatically:
+
+1. Installs dependencies using cached pnpm store.
+2. Runs **ESLint / Prettier** + unit tests (Vitest).
+3. Generates a production build.
+4. Uploads the `dist/` folder as an artifact.
+5. (Optional) If AWS credentials are provided as repo secrets it syncs the build to an S3 bucket and invalidates the linked CloudFront distribution.
+
+### AWS Secrets expected
+
+```
+AWS_ACCESS_KEY_ID
+AWS_SECRET_ACCESS_KEY
+AWS_REGION (e.g. us-east-1)
+S3_BUCKET (e.g. my-site-bucket)
+CLOUDFRONT_DISTRIBUTION_ID (optional)
+```
+
+### One-line deployment (manual)
+
+```bash
+pnpm build && aws s3 sync dist s3://$S3_BUCKET --delete && \
+  aws cloudfront create-invalidation --distribution-id $CLOUDFRONT_DISTRIBUTION_ID --paths '/*'
+```
+
+You can also hook the build output to **AWS Amplify** by pointing the Amplify Console at this repository – the default build command (`pnpm build`) and output directory (`dist`) are auto-detected.

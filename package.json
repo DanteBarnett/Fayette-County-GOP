@@ -23,7 +23,11 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0",
-    "zod": "^3.22.4"
+    "zod": "^3.22.4",
+    "workbox-precaching": "^6.6.2",
+    "workbox-routing": "^6.6.2",
+    "workbox-strategies": "^6.6.2",
+    "workbox-core": "^6.6.2"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.0.0",
@@ -47,7 +51,8 @@
     "typescript": "^5.3.3",
     "vite": "^5.0.8",
     "vite-plugin-pwa": "^0.16.0",
-    "vitest": "^0.34.0"
+    "vitest": "^0.34.0",
+    "only-allow": "^1.2.1"
   },
   "lint-staged": {
     "*.{ts,tsx,css,md,json}": [
