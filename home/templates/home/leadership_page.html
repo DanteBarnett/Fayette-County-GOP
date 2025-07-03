@@ -11,7 +11,7 @@
         <h3 class="mt-4 font-semibold text-lg">{{ leader.name }}</h3>
         <p class="text-sm text-navy-700">{{ leader.role }}</p>
         <div class="prose mt-2">{{ leader.bio|richtext }}</div>
-        {% if leader.email %}<a href="mailto:{{ leader.email }}" class="text-patriot-red hover:text-red-700 text-sm inline-block mt-3 transition-colors">{{ leader.email }}</a>{% endif %}
+        {% if leader.email %}<a href="mailto:{{ leader.email }}" class="text-patriot-red hover:text-red-700 text-sm inline-block mt-3 transition-colors duration-300">{{ leader.email }}</a>{% endif %}
       </div>
     {% endfor %}
   </div>

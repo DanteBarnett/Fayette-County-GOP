@@ -8,10 +8,10 @@
   <p class="mt-1 font-medium">Location: {{ page.location }}</p>
   <div class="prose mt-6">{{ page.description|richtext }}</div>
   {% if page.flyer %}
-    <a href="{{ page.flyer.url }}" class="inline-block mt-6 px-4 py-2 bg-navy-900 text-white rounded-md hover:bg-navy-700 transition-colors">Download Flyer</a>
+    <a href="{{ page.flyer.url }}" class="inline-block mt-6 px-4 py-2 bg-navy-900 text-white rounded-md hover:bg-navy-700 transition-colors duration-300">Download Flyer</a>
   {% endif %}
   {% if page.cta_link %}
-    <a href="{{ page.cta_link }}" class="inline-block mt-4 px-4 py-2 bg-patriot-red text-white rounded-md hover:bg-red-700 transition-colors">Learn More</a>
+    <a href="{{ page.cta_link }}" class="inline-block mt-4 px-4 py-2 bg-patriot-red text-white rounded-md hover:bg-red-700 transition-colors duration-300">Learn More</a>
   {% endif %}
 </article>
 {% endblock %}
