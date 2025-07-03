@@ -1,0 +1,43 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres:15-alpine
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fayette_gop
+    ports:
+      - '5432:5432'
+
+  web:
+    build: .
+    command: python manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+      - static_volume:/app/static
+    environment:
+      DJANGO_SETTINGS_MODULE: fayette_gop.settings
+      DJANGO_SECRET_KEY: insecure-local-key
+      DATABASE_URL: postgres://postgres:postgres@db:5432/fayette_gop
+    ports:
+      - '8000:8000'
+    depends_on:
+      - db
+
+  vite:
+    image: node:20-alpine
+    working_dir: /app/frontend
+    command: sh -c "npm install -g pnpm && pnpm install && pnpm dev --host"
+    volumes:
+      - ./frontend:/app/frontend
+    ports:
+      - '5173:5173'
+    environment:
+      - NODE_ENV=development
+
+volumes:
+  postgres_data:
+  static_volume:

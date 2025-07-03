@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<section class="relative bg-cover bg-center h-screen" style="background-image: url({% if page.hero_image %}{% image page.hero_image original %}{% else %}/static/img/hero.jpg{% endif %});">
+  <div class="absolute inset-0 bg-blue-900/70"></div>
+  <div class="relative container mx-auto flex items-center justify-center h-full text-center text-white px-4">
+    <div class="space-y-6 animate-fade-in">
+      <h1 class="text-4xl md:text-6xl font-bold font-montserrat">{{ page.hero_title }}</h1>
+      <p class="text-lg md:text-2xl">{{ page.hero_subtitle }}</p>
+
+      <div class="flex flex-wrap items-center justify-center gap-4">
+        {% for button in page.cta_buttons %}
+          <a href="{{ button.value.link }}" class="px-6 py-3 bg-red-700 hover:bg-red-800 text-white rounded-md shadow">{{ button.value.label }}</a>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="py-16 bg-gray-100" id="mission">
+  <div class="container mx-auto max-w-3xl prose lg:prose-xl">
+    {{ page.mission|richtext }}
+  </div>
+</section>
+{% endblock %}
