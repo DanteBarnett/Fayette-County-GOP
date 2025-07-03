@@ -1,25 +1,277 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
+
 {% block content %}
-<section class="container mx-auto py-16 px-4">
-  <h2 class="text-3xl font-bold mb-6">Upcoming Events</h2>
-  <div class="space-y-8">
-    {% for event in page.get_children.live.order_by('start_date') %}
-      {% with event=event.specific %}
-      <article class="bg-white shadow rounded-lg p-6 flex flex-col md:flex-row md:items-center">
-        <div class="flex-1">
-          <h3 class="text-2xl font-semibold"><a href="{{ event.url }}">{{ event.title }}</a></h3>
-          <p class="text-sm text-gray-600 mt-1">{{ event.start_date|date:"F j, Y g:i A" }}</p>
-          <p class="mt-2">{{ event.description|richtext }}</p>
-        </div>
-        {% if event.image %}
-          <div class="md:ml-6 mt-4 md:mt-0 w-48">{% image event.image fill-300x200 class="rounded-lg" %}</div>
-        {% endif %}
-      </article>
-      {% endwith %}
-    {% empty %}
-      <p>No upcoming events.</p>
-    {% endfor %}
+<!-- Page Header -->
+<section class="bg-gradient-to-r from-navy-900 to-navy-700 py-20 mt-20">
+  <div class="container mx-auto px-6 text-center text-white">
+    <h1 class="text-4xl md:text-6xl font-serif font-bold mb-6">{{ page.title }}</h1>
+    {% if page.intro %}
+      <div class="prose prose-lg prose-white max-w-3xl mx-auto">
+        {{ page.intro|richtext }}
+      </div>
+    {% endif %}
   </div>
 </section>
+
+<!-- Events Grid -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-6">
+    <!-- Filter/Sort Options -->
+    <div class="flex flex-col md:flex-row justify-between items-center mb-12">
+      <div class="flex space-x-4 mb-6 md:mb-0">
+        <button class="filter-btn active px-6 py-3 bg-patriot-red text-white rounded-full font-semibold hover:bg-red-700 transition-colors" data-filter="all">All Events</button>
+        <button class="filter-btn px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 transition-colors" data-filter="upcoming">Upcoming</button>
+        <button class="filter-btn px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 transition-colors" data-filter="meetings">Meetings</button>
+        <button class="filter-btn px-6 py-3 bg-gray-200 text-gray-700 rounded-full font-semibold hover:bg-gray-300 transition-colors" data-filter="fundraisers">Fundraisers</button>
+      </div>
+      
+      <div class="flex items-center space-x-4">
+        <label for="sort-select" class="text-gray-600 font-medium">Sort by:</label>
+        <select id="sort-select" class="border border-gray-300 rounded-lg px-4 py-2 focus:ring-2 focus:ring-patriot-red focus:border-transparent">
+          <option value="date">Date</option>
+          <option value="title">Title</option>
+          <option value="location">Location</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Events Grid -->
+    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8" id="events-grid">
+      {% for event in page.get_children.live %}
+        <article class="event-card bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 transform hover:-translate-y-2" data-category="upcoming">
+          <!-- Event Image -->
+          <div class="relative h-48 bg-gradient-to-br from-navy-900 to-navy-700 overflow-hidden">
+            {% if event.specific.image %}
+              {% image event.specific.image fill-400x300 as event_img %}
+              <img src="{{ event_img.url }}" alt="{{ event.title }}" class="w-full h-full object-cover">
+            {% else %}
+              <div class="w-full h-full bg-gradient-to-br from-patriot-red to-red-700 flex items-center justify-center">
+                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                </svg>
+              </div>
+            {% endif %}
+            
+            <!-- Date Badge -->
+            <div class="absolute top-4 left-4 bg-white/95 backdrop-blur-sm rounded-lg px-3 py-2 text-center shadow-lg">
+              <div class="text-patriot-red font-bold text-lg">{{ event.specific.start_date|date:"j" }}</div>
+              <div class="text-gray-600 text-sm font-medium">{{ event.specific.start_date|date:"M" }}</div>
+            </div>
+          </div>
+
+          <!-- Event Content -->
+          <div class="p-6">
+            <div class="flex items-center text-sm text-gray-500 mb-3">
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd" />
+              </svg>
+              {{ event.specific.start_date|date:"F j, Y" }}
+              {% if event.specific.start_date|date:"g:i A" != "12:00 AM" %}
+                at {{ event.specific.start_date|date:"g:i A" }}
+              {% endif %}
+            </div>
+
+            <h3 class="text-xl font-serif font-bold text-navy-900 mb-3 leading-tight">
+              <a href="{{ event.url }}" class="hover:text-patriot-red transition-colors">{{ event.title }}</a>
+            </h3>
+
+            {% if event.specific.location %}
+              <div class="flex items-center text-gray-600 mb-4">
+                <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                </svg>
+                {{ event.specific.location }}
+              </div>
+            {% endif %}
+
+            <div class="text-gray-600 mb-6 line-clamp-3">
+              {{ event.specific.description|striptags|truncatewords:20 }}
+            </div>
+
+            <div class="flex items-center justify-between">
+              <a href="{{ event.url }}" class="inline-flex items-center text-patriot-red font-semibold hover:text-red-700 transition-colors">
+                Learn More
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                </svg>
+              </a>
+
+              {% if event.specific.cta_link %}
+                <a href="{{ event.specific.cta_link }}" class="bg-patriot-red text-white px-4 py-2 rounded-full text-sm font-semibold hover:bg-red-700 transition-colors">
+                  Register
+                </a>
+              {% endif %}
+            </div>
+          </div>
+        </article>
+      {% empty %}
+        <div class="col-span-full text-center py-20">
+          <div class="max-w-md mx-auto">
+            <svg class="w-16 h-16 text-gray-400 mx-auto mb-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3a4 4 0 118 0v4m-4 8h4m-4 0a4 4 0 11-8 0h8zm0 0V9a4 4 0 118 0v6m-4 0h4" />
+            </svg>
+            <h3 class="text-xl font-serif font-bold text-gray-900 mb-3">No Events Scheduled</h3>
+            <p class="text-gray-600 mb-6">Check back soon for upcoming events and activities.</p>
+            <a href="/contact/" class="inline-flex items-center bg-patriot-red text-white px-6 py-3 rounded-full font-semibold hover:bg-red-700 transition-colors">
+              Get Notified
+              <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    <!-- Load More Button -->
+    {% if page.get_children.live.count > 9 %}
+      <div class="text-center mt-12">
+        <button id="load-more" class="bg-navy-900 text-white px-8 py-4 rounded-full font-semibold hover:bg-navy-700 transition-colors focus:ring-4 focus:ring-navy-500 focus:ring-offset-2">
+          Load More Events
+        </button>
+      </div>
+    {% endif %}
+  </div>
+</section>
+
+<!-- Call to Action -->
+<section class="py-20 bg-gray-50">
+  <div class="container mx-auto px-6 text-center">
+    <div class="max-w-3xl mx-auto">
+      <h2 class="text-4xl font-serif font-bold text-navy-900 mb-6">
+        Stay Connected
+      </h2>
+      <p class="text-xl text-gray-600 mb-8">
+        Don't miss out on important events and activities. Subscribe to our newsletter for the latest updates.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/newsletter/" class="bg-patriot-red text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transition-colors">
+          Subscribe to Newsletter
+        </a>
+        <a href="/volunteer/" class="border-2 border-patriot-red text-patriot-red px-8 py-4 rounded-full text-lg font-semibold hover:bg-patriot-red hover:text-white transition-colors">
+          Volunteer With Us
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .line-clamp-3 {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Initialize scroll animations for event cards
+  if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+    // Stagger animation for event cards
+    gsap.fromTo('.event-card', {
+      y: 80,
+      opacity: 0,
+      scale: 0.95
+    }, {
+      y: 0,
+      opacity: 1,
+      scale: 1,
+      duration: 0.6,
+      stagger: {
+        amount: 0.8,
+        from: "start"
+      },
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '#events-grid',
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    // Alternate slide-in for even/odd cards
+    gsap.fromTo('.event-card:nth-child(even)', {
+      x: 50,
+      opacity: 0
+    }, {
+      x: 0,
+      opacity: 1,
+      duration: 0.8,
+      delay: 0.3,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '#events-grid',
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+
+    gsap.fromTo('.event-card:nth-child(odd)', {
+      x: -50,
+      opacity: 0
+    }, {
+      x: 0,
+      opacity: 1,
+      duration: 0.8,
+      delay: 0.1,
+      ease: "power2.out",
+      scrollTrigger: {
+        trigger: '#events-grid',
+        start: 'top 85%',
+        toggleActions: 'play none none reverse'
+      }
+    });
+  }
+
+  // Filter functionality
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const eventCards = document.querySelectorAll('.event-card');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // Update active button
+      filterBtns.forEach(b => {
+        b.classList.remove('active', 'bg-patriot-red', 'text-white');
+        b.classList.add('bg-gray-200', 'text-gray-700');
+      });
+      this.classList.add('active', 'bg-patriot-red', 'text-white');
+      this.classList.remove('bg-gray-200', 'text-gray-700');
+
+      // Filter events
+      const filter = this.dataset.filter;
+      eventCards.forEach(card => {
+        if (filter === 'all' || card.dataset.category === filter) {
+          card.style.display = 'block';
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo(card, {opacity: 0, y: 20}, {opacity: 1, y: 0, duration: 0.3});
+          }
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
+
+  // Load more functionality
+  const loadMoreBtn = document.getElementById('load-more');
+  if (loadMoreBtn) {
+    loadMoreBtn.addEventListener('click', function() {
+      // This would typically load more events via AJAX
+      console.log('Loading more events...');
+    });
+  }
+
+  // Sort functionality
+  const sortSelect = document.getElementById('sort-select');
+  if (sortSelect) {
+    sortSelect.addEventListener('change', function() {
+      // This would typically re-sort the events
+      console.log('Sorting by:', this.value);
+    });
+  }
+});
+</script>
 {% endblock %}

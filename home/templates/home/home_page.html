@@ -1,26 +1,325 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-<section class="relative bg-cover bg-center h-screen" style="background-image: url('{% if page.hero_image %}{% image page.hero_image original as hero %}{{ hero.url }}{% else %}{% static 'img/hero.jpg' %}{% endif %}');">
-  <div class="absolute inset-0 bg-blue-900/70"></div>
-  <div class="relative container mx-auto flex items-center justify-center h-full text-center text-white px-4">
-    <div class="space-y-6 animate-fade-in">
-      <h1 class="text-4xl md:text-6xl font-bold font-montserrat">{{ page.hero_title }}</h1>
-      <p class="text-lg md:text-2xl">{{ page.hero_subtitle }}</p>
+<!-- Hero Section -->
+<section class="hero-section relative bg-cover bg-center min-h-screen flex items-center justify-center text-center overflow-hidden" 
+         style="background-image: linear-gradient(rgba(30, 58, 138, 0.7), rgba(55, 48, 163, 0.6)), url('{% if page.hero_image %}{% image page.hero_image original as hero %}{{ hero.url }}{% else %}{% static 'img/hero.jpg' %}{% endif %}');">
+  <div class="absolute inset-0 bg-gradient-to-br from-navy-900/70 via-navy-800/60 to-navy-700/50"></div>
+  
+  <div class="relative z-10 container mx-auto px-6 text-white">
+    <div class="max-w-5xl mx-auto space-y-8">
+      <!-- Animated Hero Title -->
+      <h1 id="hero-title" class="hero-title text-5xl md:text-7xl lg:text-8xl font-serif font-bold leading-tight text-white drop-shadow-lg">
+        {{ page.hero_title|default:"Fayette County Republican Party" }}
+      </h1>
+      
+      {% if page.hero_subtitle %}
+      <p class="hero-subtitle text-xl md:text-2xl lg:text-3xl font-light max-w-4xl mx-auto opacity-0 text-gray-100">
+        {{ page.hero_subtitle }}
+      </p>
+      {% endif %}
 
-      <div class="flex flex-wrap items-center justify-center gap-4">
+      <!-- Hero CTAs -->
+      <div class="hero-ctas flex flex-col sm:flex-row items-center justify-center gap-6 mt-12 opacity-0">
         {% for button in page.cta_buttons %}
-          <a href="{{ button.value.link }}" class="px-6 py-3 bg-red-700 hover:bg-red-800 text-white rounded-md shadow">{{ button.value.label }}</a>
+          {% if forloop.first %}
+            <a href="{{ button.value.link|default:'/contribute/' }}" 
+               class="hero-cta bg-patriot-red text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-transparent">
+              {{ button.value.label|default:"Contribute" }}
+            </a>
+          {% else %}
+            <a href="{{ button.value.link|default:'/volunteer/' }}" 
+               class="hero-cta border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-navy-900 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent">
+              {{ button.value.label|default:"Volunteer" }}
+            </a>
+          {% endif %}
+        {% empty %}
+          <a href="/contribute/" 
+             class="hero-cta bg-patriot-red text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-transparent">
+            Contribute
+          </a>
+          <a href="/volunteer/" 
+             class="hero-cta border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-navy-900 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent">
+            Volunteer
+          </a>
         {% endfor %}
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-white opacity-70 animate-bounce">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+    </svg>
+  </div>
+</section>
+
+<!-- Our Mission Section -->
+{% if page.mission %}
+<section class="py-20 bg-gray-50" id="mission">
+  <div class="container mx-auto px-6">
+    <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="space-y-8">
+        <h2 class="text-4xl lg:text-5xl font-serif font-bold text-navy-900 leading-tight">
+          Our Mission
+        </h2>
+        <div class="prose prose-lg prose-navy max-w-none">
+          {{ page.mission|richtext }}
+        </div>
+      </div>
+      <div class="relative">
+        <div class="bg-gradient-to-br from-patriot-red to-red-700 rounded-2xl p-1 shadow-2xl">
+          <div class="bg-white rounded-xl p-8 h-full">
+            <div class="text-center space-y-6">
+              <div class="w-16 h-16 bg-patriot-red rounded-full flex items-center justify-center mx-auto">
+                <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-serif font-bold text-navy-900">Conservative Values</h3>
+              <p class="text-gray-600">Defending the principles that make America great for future generations.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<!-- Top Issues Section -->
+<section class="py-20 bg-white">
+  <div class="container mx-auto px-6">
+    <div class="text-center max-w-3xl mx-auto mb-16">
+      <h2 class="text-4xl lg:text-5xl font-serif font-bold text-navy-900 mb-6">
+        Top Issues
+      </h2>
+      <p class="text-xl text-gray-600">
+        The key issues we're fighting for in Fayette County
+      </p>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="issue-card group perspective-1000">
+        <div class="relative preserve-3d group-hover:rotate-y-180 transition-transform duration-700">
+          <div class="absolute inset-0 backface-hidden">
+            <div class="bg-gradient-to-br from-navy-900 to-navy-700 rounded-2xl p-8 text-white h-64 flex flex-col justify-center items-center text-center shadow-2xl">
+              <div class="w-16 h-16 bg-patriot-red rounded-full flex items-center justify-center mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M8.433 7.418c.155-.103.346-.196.567-.267v1.698a2.305 2.305 0 01-.567-.267C8.07 8.34 8 8.114 8 8c0-.114.07-.34.433-.582zM11 12.849v-1.698c.22.071.412.164.567.267.364.243.433.468.433.582 0 .114-.07.34-.433.582a2.305 2.305 0 01-.567.267z" />
+                  <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-13a1 1 0 10-2 0v.092a4.535 4.535 0 00-1.676.662C6.602 6.234 6 7.009 6 8c0 .99.602 1.765 1.324 2.246.48.32 1.054.545 1.676.662v1.941c-.391-.127-.68-.317-.843-.504a1 1 0 10-1.51 1.31c.562.649 1.413 1.076 2.353 1.253V15a1 1 0 102 0v-.092a4.535 4.535 0 001.676-.662C13.398 13.766 14 12.991 14 12c0-.99-.602-1.765-1.324-2.246A4.535 4.535 0 0011 9.092V7.151c.391.127.68.317.843.504a1 1 0 101.511-1.31c-.563-.649-1.413-1.076-2.354-1.253V5z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">Economic Growth</h3>
+              <p>Supporting small businesses and reducing regulations</p>
+            </div>
+          </div>
+          <div class="absolute inset-0 rotate-y-180 backface-hidden">
+            <div class="bg-patriot-red rounded-2xl p-8 text-white h-64 flex flex-col justify-center shadow-2xl">
+              <h4 class="text-xl font-bold mb-4">Our Plan</h4>
+              <ul class="space-y-2 text-sm">
+                <li>• Reduce business taxes</li>
+                <li>• Streamline permits</li>
+                <li>• Support local entrepreneurs</li>
+                <li>• Attract new industries</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card group perspective-1000">
+        <div class="relative preserve-3d group-hover:rotate-y-180 transition-transform duration-700">
+          <div class="absolute inset-0 backface-hidden">
+            <div class="bg-gradient-to-br from-navy-900 to-navy-700 rounded-2xl p-8 text-white h-64 flex flex-col justify-center items-center text-center shadow-2xl">
+              <div class="w-16 h-16 bg-patriot-red rounded-full flex items-center justify-center mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM3.31 9.397L5 10.12v4.102a8.969 8.969 0 00-1.05-.174 1 1 0 01-.89-.89 11.115 11.115 0 01.25-3.762zM9.3 16.573A9.026 9.026 0 007 14.935v-3.957l1.818.78a3 3 0 002.364 0l5.508-2.361a11.026 11.026 0 01.25 3.762 1 1 0 01-.89.89 8.968 8.968 0 00-5.35 2.524 1 1 0 01-1.4 0zM6 18a1 1 0 001-1v-2.065a8.935 8.935 0 00-2-.712V17a1 1 0 001 1z"/>
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">Education Excellence</h3>
+              <p>Ensuring quality education and parental rights</p>
+            </div>
+          </div>
+          <div class="absolute inset-0 rotate-y-180 backface-hidden">
+            <div class="bg-patriot-red rounded-2xl p-8 text-white h-64 flex flex-col justify-center shadow-2xl">
+              <h4 class="text-xl font-bold mb-4">Our Priorities</h4>
+              <ul class="space-y-2 text-sm">
+                <li>• Increase teacher pay</li>
+                <li>• Expand school choice</li>
+                <li>• Protect parental rights</li>
+                <li>• Focus on fundamentals</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="issue-card group perspective-1000">
+        <div class="relative preserve-3d group-hover:rotate-y-180 transition-transform duration-700">
+          <div class="absolute inset-0 backface-hidden">
+            <div class="bg-gradient-to-br from-navy-900 to-navy-700 rounded-2xl p-8 text-white h-64 flex flex-col justify-center items-center text-center shadow-2xl">
+              <div class="w-16 h-16 bg-patriot-red rounded-full flex items-center justify-center mb-4">
+                <svg class="w-8 h-8" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                </svg>
+              </div>
+              <h3 class="text-2xl font-bold mb-2">Public Safety</h3>
+              <p>Supporting law enforcement and community security</p>
+            </div>
+          </div>
+          <div class="absolute inset-0 rotate-y-180 backface-hidden">
+            <div class="bg-patriot-red rounded-2xl p-8 text-white h-64 flex flex-col justify-center shadow-2xl">
+              <h4 class="text-xl font-bold mb-4">Our Commitment</h4>
+              <ul class="space-y-2 text-sm">
+                <li>• Support law enforcement</li>
+                <li>• Neighborhood watch programs</li>
+                <li>• Crime prevention initiatives</li>
+                <li>• Emergency preparedness</li>
+              </ul>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="py-16 bg-gray-100" id="mission">
-  <div class="container mx-auto max-w-3xl prose lg:prose-xl">
-    {{ page.mission|richtext }}
+<!-- Call to Action Section -->
+<section class="py-20 bg-gradient-to-r from-navy-900 to-navy-700">
+  <div class="container mx-auto px-6 text-center">
+    <div class="max-w-3xl mx-auto text-white space-y-8">
+      <h2 class="text-4xl lg:text-5xl font-serif font-bold">
+        Join the Movement
+      </h2>
+      <p class="text-xl text-gray-200">
+        Together, we can build a stronger, more prosperous Fayette County for all families.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/volunteer/" class="bg-patriot-red text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+          Get Involved
+        </a>
+        <a href="/events/" class="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-navy-900 transform hover:scale-105 transition-all duration-300 shadow-2xl">
+          Upcoming Events
+        </a>
+      </div>
+    </div>
   </div>
 </section>
+
+<style>
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+  .preserve-3d {
+    transform-style: preserve-3d;
+  }
+  .backface-hidden {
+    backface-visibility: hidden;
+  }
+  .rotate-y-180 {
+    transform: rotateY(180deg);
+  }
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Register GSAP plugins
+  gsap.registerPlugin(ScrollTrigger);
+  
+  // Hero title animation
+  const heroTitle = document.getElementById('hero-title');
+  if (heroTitle) {
+    // Split text into words for animation
+    const words = heroTitle.textContent.split(' ');
+    heroTitle.innerHTML = words.map(word => `<span class="word">${word}</span>`).join(' ');
+    
+    // Animate each word dropping in
+    gsap.fromTo('.word', {
+      y: 100,
+      opacity: 0,
+      rotationX: -90
+    }, {
+      y: 0,
+      opacity: 1,
+      rotationX: 0,
+      duration: 0.8,
+      stagger: 0.2,
+      ease: "back.out(1.7)",
+      delay: 1.2 // Start after loading screen
+    });
+  }
+  
+  // Animate subtitle
+  gsap.fromTo('.hero-subtitle', {
+    y: 50,
+    opacity: 0
+  }, {
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    delay: 2.5,
+    ease: "power2.out"
+  });
+  
+  // Animate CTAs
+  gsap.fromTo('.hero-ctas', {
+    y: 50,
+    opacity: 0
+  }, {
+    y: 0,
+    opacity: 1,
+    duration: 1,
+    delay: 3,
+    ease: "power2.out"
+  });
+
+  // Parallax effect for hero section
+  gsap.to('.hero-section', {
+    backgroundPosition: '50% 100%',
+    ease: 'none',
+    scrollTrigger: {
+      trigger: '.hero-section',
+      start: 'top top',
+      end: 'bottom top',
+      scrub: true
+    }
+  });
+
+  // Animate mission section on scroll
+  gsap.fromTo('#mission h2', {
+    x: -100,
+    opacity: 0
+  }, {
+    x: 0,
+    opacity: 1,
+    duration: 1,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: '#mission',
+      start: 'top 80%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+
+  // Animate issue cards
+  gsap.fromTo('.issue-card', {
+    y: 100,
+    opacity: 0
+  }, {
+    y: 0,
+    opacity: 1,
+    duration: 0.8,
+    stagger: 0.2,
+    ease: "power2.out",
+    scrollTrigger: {
+      trigger: '.issue-card',
+      start: 'top 85%',
+      toggleActions: 'play none none reverse'
+    }
+  });
+});
+</script>
 {% endblock %}
