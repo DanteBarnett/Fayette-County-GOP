@@ -7,7 +7,7 @@
     {% for block in page.issues %}
       {% if block.block_type == 'issue' %}
       <div class="perspective">
-        <div class="issue-card relative bg-white rounded-lg shadow-lg overflow-hidden transform transition-transform duration-500 hover:rotate-y-180">
+        <div class="issue-card relative bg-white rounded-lg shadow-lg overflow-hidden">
           <div class="front p-8 text-center space-y-4">
             {% if block.value.icon %}<span class="text-5xl text-patriotRed"><i class="{{ block.value.icon }}"></i></span>{% endif %}
             <h3 class="text-xl font-semibold">{{ block.value.title }}</h3>

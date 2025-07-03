@@ -80,3 +80,10 @@ if (gallery) {
     })
   })
 }
+
+// REMOVE SPLASH AFTER LOAD
+window.addEventListener('load', () => {
+  setTimeout(() => {
+    document.getElementById('splash')?.remove()
+  }, 1100)
+})

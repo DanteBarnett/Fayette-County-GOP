@@ -111,3 +111,39 @@ body {
     margin-bottom: 1rem;
   }
 }
+
+.container { width: 100%; max-width: 1200px; margin-left: auto; margin-right: auto; }
+.px-4 { padding-left: 1rem; padding-right: 1rem; }
+.py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+.mb-12 { margin-bottom: 3rem; }
+.space-y-6 > * + * { margin-top: 1.5rem; }
+.flex { display: flex; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.text-center { text-align: center; }
+.text-white { color: #fff; }
+.text-4xl { font-size: 2.25rem; line-height: 1.25; }
+.md\:text-6xl { font-size: 3.5rem; }
+.font-bold { font-weight: 700; }
+.prose { max-width: 65ch; }
+.rounded-lg { border-radius: 0.5rem; }
+.shadow { box-shadow: 0 2px 6px rgba(0,0,0,0.1); }
+.break-inside-avoid { break-inside: avoid; }
+
+#splash {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $white;
+  z-index: 9999;
+  animation: splashFade 1s forwards 1s;
+}
+
+@keyframes splashFade {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}

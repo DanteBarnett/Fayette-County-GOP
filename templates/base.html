@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{% block title %}Fayette County GOP{% endblock %}</title>
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
-    <link href="{% static 'dist/tailwind.css' %}" rel="stylesheet" />
     <link rel="manifest" href="{% static 'manifest.json' %}" />
     <link rel="stylesheet" href="{% static 'css/main.css' %}" />
     {% if GA_ID %}
@@ -22,6 +21,10 @@
   <body class="font-montserrat antialiased text-gray-900">
     <a href="#content" class="sr-only focus:not-sr-only">Skip to content</a>
 
+    <div id="splash">
+      <img src="{% static 'img/logo.svg' %}" alt="Fayette GOP logo" />
+    </div>
+
     {% include "partials/nav.html" %}
 
     <main id="content" tabindex="-1">
@@ -35,7 +38,6 @@
 
     {% include "partials/footer.html" %}
 
-    <script type="module" src="{% static 'frontend/assets/index.js' %}"></script>
     <script defer src="{% static 'js/main.js' %}"></script>
     <script>
       if ('serviceWorker' in navigator) {

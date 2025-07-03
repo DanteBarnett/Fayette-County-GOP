@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     "modelcluster",
     "taggit",
     "pwa",                      # <-- replaces django_serviceworker
+    "sass_processor",
     # project apps
     "home",
 ]
@@ -132,6 +133,15 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
+
+# django-sass-processor
+SASS_PROCESSOR_ENABLED = True
+SASS_PROCESSOR_ROOT = STATIC_ROOT
+STATICFILES_FINDERS = [
+    "django.contrib.staticfiles.finders.FileSystemFinder",
+    "django.contrib.staticfiles.finders.AppDirectoriesFinder",
+    "sass_processor.finders.CssFinder",
+]
 
 # ------------------------------------------------------------------------------
 # Wagtail
