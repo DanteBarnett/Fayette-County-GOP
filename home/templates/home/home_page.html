@@ -1,8 +1,12 @@
 {% extends "base.html" %}
-{% load wagtailcore_tags wagtailimages_tags %}
+{% load wagtailcore_tags wagtailimages_tags static %}
 
 {% block content %}
-<section class="relative bg-cover bg-center h-screen" style="background-image: url('{% if page.hero_image %}{% image page.hero_image original as hero %}{{ hero.url }}{% else %}{% static 'img/hero.jpg' %}{% endif %}');">
+{% if page.hero_image %}{% with bg=page.hero_image.file.url %}
+<section class="relative bg-cover bg-center h-screen" style="background-image: url('{{ bg }}');">
+{% endwith %}{% else %}
+<section class="relative bg-cover bg-center h-screen" style="background-image: url('{% static 'img/hero.jpg' %}');">
+{% endif %}
   <div class="absolute inset-0 bg-blue-900/70"></div>
   <div class="relative container mx-auto flex items-center justify-center h-full text-center text-white px-4">
     <div class="space-y-6 animate-fade-in">
