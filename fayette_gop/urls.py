@@ -5,20 +5,32 @@ from django.contrib import admin
 from django.urls import include, path, re_path
 from django.views.generic import TemplateView
 
+# Wagtail
+from wagtail.admin import urls as wagtailadmin_urls
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtail_docs_urls
 
+# Local
 from home.feeds import LatestPostsFeed
 
 urlpatterns = [
+    # Django admin (default)
     path("django-admin/", admin.site.urls),
+
+    # Wagtail admin (⇠ was missing, causes /admin/ 404)
+    path("admin/", include(wagtailadmin_urls)),
+
+    # Wagtail documents
     path("documents/", include(wagtail_docs_urls)),
 
-    # PWA assets (django-pwa)
-    path("manifest.json", TemplateView.as_view(
-        template_name="manifest.json",
-        content_type="application/manifest+json",
-    )),
+    # PWA assets
+    path(
+        "manifest.json",
+        TemplateView.as_view(
+            template_name="manifest.json",
+            content_type="application/manifest+json",
+        ),
+    ),
     re_path(
         r"^service-worker\.js$",
         TemplateView.as_view(
@@ -28,18 +40,25 @@ urlpatterns = [
         name="service-worker",
     ),
 
-    # RSS
+    # RSS feed
     path("blog/rss.xml", LatestPostsFeed(), name="rss_feed"),
 
-    # Wagtail front-end pages
+    # Front-end pages (must stay last)
     path("", include(wagtail_urls)),
 ]
 
-# -------------------------------------------------------------------
-# DEBUG toolbar & media in development
-# -------------------------------------------------------------------
+# ──────────────────────────────────────────────
+# Development helpers
+# ──────────────────────────────────────────────
 if settings.DEBUG:
-    import debug_toolbar
+    # Debug Toolbar
+    try:
+        import debug_toolbar
 
-    urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]
+        urlpatterns += [path("__debug__/", include(debug_toolbar.urls))]
+    except ModuleNotFoundError:
+        pass  # toolbar not installed; skip
+
+    # Serve uploaded media
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
