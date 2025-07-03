@@ -7,6 +7,7 @@ interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   as?: 'button' | 'a';
   href?: string;
   children?: ReactNode;
+  className?: string;
 }
 
 export default function Button({
