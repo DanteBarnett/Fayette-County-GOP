@@ -5,7 +5,7 @@
 {% if page.hero_image %}
   <section class="hero" style="background-image: url('{{ page.hero_image.url }}');">
 {% else %}
-  <section class="hero" style="background-image: url('{% static &quot;img/hero.jpg&quot; %}');">
+  <section class='hero' style='background-image: url("{% static "img/hero.jpg" %}");'>
 {% endif %}
     <div class="hero-overlay"></div>
     <div class="hero-inner">
@@ -14,7 +14,7 @@
         <p class="hero-subtitle">{{ page.hero_subtitle }}</p>
         <div class="cta-group">
           {% for button in page.cta_buttons %}
-            <a href="{{ button.value.link }}" class="px-6 py-3 bg-patriotRed text-white rounded-md shadow">{{ button.value.label }}</a>
+            <a href="{{ button.value.link }}" class="cta-button">{{ button.value.label }}</a>
           {% endfor %}
         </div>
       </div>
