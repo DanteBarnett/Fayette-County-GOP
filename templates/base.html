@@ -148,7 +148,7 @@
     <!-- Register service worker for offline support -->
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('{% url 'service-worker' %}');
+        navigator.serviceWorker.register("{% url 'service-worker' %}");
       }
     </script>
 
