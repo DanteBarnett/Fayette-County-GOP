@@ -13,7 +13,7 @@ import environ
 BASE_DIR = Path(__file__).resolve().parent.parent
 env = environ.Env(
     # casting, default value
-    DJANGO_DEBUG=(bool, False),
+    DJANGO_DEBUG=(bool, True),
     ALLOWED_HOSTS=(list, ["localhost", "127.0.0.1"]),
 )
 # read .env if present
@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.sitemaps",
+    "wagtail.contrib.settings",
     "wagtailseo",
     "modelcluster",
     "taggit",

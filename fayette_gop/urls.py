@@ -7,11 +7,17 @@ from django.views.generic import TemplateView
 
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtail_docs_urls
+from wagtail.admin import urls as wagtailadmin_urls
 
 from home.feeds import LatestPostsFeed
 
 urlpatterns = [
+    # Django's built-in admin (namespaced at /django-admin/ to avoid clashing)
     path("django-admin/", admin.site.urls),
+
+    # Wagtail admin – this is what most editors will use at /admin/
+    path("admin/", include(wagtailadmin_urls)),
+
     path("documents/", include(wagtail_docs_urls)),
 
     # PWA assets (django-pwa)
