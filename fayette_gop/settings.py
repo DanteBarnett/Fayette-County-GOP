@@ -153,6 +153,10 @@ EMAIL_BACKEND = "sendgrid_backend.SendgridBackend"
 SENDGRID_API_KEY = env("SENDGRID_API_KEY", default="")
 SENDGRID_SANDBOX_MODE_IN_DEBUG = False
 
+# Fallback to console email backend if no API key is set (prevents runtime errors on 5xx reporting)
+if not SENDGRID_API_KEY:
+    EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
+
 # ------------------------------------------------------------------------------
 # Google Analytics
 # ------------------------------------------------------------------------------

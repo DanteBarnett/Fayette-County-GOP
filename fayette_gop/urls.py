@@ -3,16 +3,22 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import include, path, re_path
-from django.views.generic import TemplateView
+from django.views.generic import TemplateView, RedirectView
+from django.templatetags.static import static
 
 from wagtail import urls as wagtail_urls
 from wagtail.documents import urls as wagtail_docs_urls
+from wagtail.admin import urls as wagtailadmin_urls
 
 from home.feeds import LatestPostsFeed
 
 urlpatterns = [
+    path("admin/", include(wagtailadmin_urls)),
     path("django-admin/", admin.site.urls),
     path("documents/", include(wagtail_docs_urls)),
+
+    # Redirect for favicon.ico must appear before the catch-all Wagtail pattern
+    path("favicon.ico", RedirectView.as_view(url=static("favicon.ico"), permanent=True)),
 
     # PWA assets (django-pwa)
     path("manifest.json", TemplateView.as_view(
