@@ -25,22 +25,22 @@
         {% for button in page.cta_buttons %}
           {% if forloop.first %}
             <a href="{{ button.value.link|default:'/contribute/' }}" 
-               class="hero-cta bg-patriot-red text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-transparent">
+               class="hero-cta cta cta--primary" aria-label="Contribute">
               {{ button.value.label|default:"Contribute" }}
             </a>
           {% else %}
             <a href="{{ button.value.link|default:'/volunteer/' }}" 
-               class="hero-cta border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-navy-900 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent">
+               class="hero-cta cta cta--secondary" aria-label="Volunteer">
               {{ button.value.label|default:"Volunteer" }}
             </a>
           {% endif %}
         {% empty %}
           <a href="/contribute/" 
-             class="hero-cta bg-patriot-red text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-red-700 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-transparent">
+             class="hero-cta cta cta--primary" aria-label="Contribute">
             Contribute
           </a>
           <a href="/volunteer/" 
-             class="hero-cta border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-navy-900 transform hover:scale-105 transition-all duration-300 shadow-2xl focus:ring-4 focus:ring-white focus:ring-offset-2 focus:ring-offset-transparent">
+             class="hero-cta cta cta--secondary" aria-label="Volunteer">
             Volunteer
           </a>
         {% endfor %}
