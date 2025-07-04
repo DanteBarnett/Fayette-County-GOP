@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "wagtail.contrib.forms",
     "wagtail.contrib.redirects",
     "wagtail.contrib.sitemaps",
+    "wagtail.contrib.settings",
     "wagtailseo",
     "modelcluster",
     "taggit",
