@@ -3,9 +3,23 @@
 
 {% block content %}
 <!-- Hero Section -->
-<section class="hero-section relative bg-cover bg-center min-h-screen flex items-center justify-center text-center overflow-hidden" 
-         style="background-image: linear-gradient(rgba(30, 58, 138, 0.7), rgba(55, 48, 163, 0.6)), url('{% if page.hero_image %}{% image page.hero_image original as hero %}{{ hero.url }}{% else %}{% static 'img/hero.jpg' %}{% endif %}');">
-  <div class="absolute inset-0 bg-gradient-to-br from-navy-900/70 via-navy-800/60 to-navy-700/50"></div>
+{% if page.hero_image %}{% image page.hero_image original as hero_img %}{% endif %}
+
+<section class="hero-section relative min-h-screen flex items-center justify-center text-center overflow-hidden bg-gradient-to-br from-navy-900/70 via-navy-800/60 to-navy-700/50">
+  <!-- Responsive hero image -->
+  <picture class="absolute inset-0 w-full h-full object-cover" aria-hidden="true">
+    {% if page.hero_image %}
+      <source srcset="{{ hero_img.url }}?w=1920" media="(min-width: 1280px)" />
+      <source srcset="{{ hero_img.url }}?w=1280" media="(min-width: 768px)" />
+      <img src="{{ hero_img.url }}?w=768" alt="" class="w-full h-full object-cover" loading="lazy" />
+    {% else %}
+      <source srcset="{% static 'img/hero@2x.jpg' %}" media="(min-width: 1280px)" />
+      <img src="{% static 'img/hero.jpg' %}" alt="" class="w-full h-full object-cover" loading="lazy" />
+    {% endif %}
+  </picture>
+
+  <!-- Gradient overlay -->
+  <div class="absolute inset-0 bg-gradient-to-br from-navy-900/70 via-navy-800/60 to-navy-700/50" aria-hidden="true"></div>
   
   <div class="relative z-10 container mx-auto px-6 text-white">
     <div class="max-w-5xl mx-auto space-y-8">
