@@ -72,11 +72,13 @@ class HomePage(Page):
               ("link",  wagblocks.PageChooserBlock(required=False)),
               ("external_url", wagblocks.URLBlock(
                   required=False,
-                  help_text="If linking off-site, fill this and leave ‘link’ blank.",
+                  help_text="If linking off-site, fill this and leave 'link' blank.",
               )),
           ], icon="link"))],
         blank=True, use_json_field=True
     )
+    events_teaser_count = models.PositiveSmallIntegerField(default=3,
+        help_text="Number of upcoming events to show on homepage teaser")
 
     content_panels = Page.content_panels + [
         FieldPanel("hero_title"),
@@ -84,6 +86,7 @@ class HomePage(Page):
         FieldPanel("hero_image"),
         FieldPanel("mission"),
         FieldPanel("cta_buttons"),
+        FieldPanel("events_teaser_count"),
     ]
 
     subpage_types = [
@@ -169,7 +172,7 @@ class VolunteerPage(StandardPage):
 class DonateRedirectPage(Page):
     """
     Instantly redirects to WinRed / Anedot / etc.  
-    - Set “External URL” in page settings.
+    - Set "External URL" in page settings.
     """
     external_url = models.URLField(help_text="Where to send visitors", blank=False)
 
