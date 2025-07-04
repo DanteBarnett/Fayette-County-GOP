@@ -29,7 +29,7 @@
     </ul>
 
     <!-- Donate Button (Right) -->
-    <a href="/contribute/" class="hidden md:inline-flex bg-patriot-red text-white px-6 py-2 rounded-full font-semibold hover:bg-red-700 transition-colors focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+    <a href="/contribute/" class="hidden md:inline-flex bg-patriot-red text-white px-4 md:px-6 lg:px-8 py-2 rounded-full font-semibold text-sm md:text-base lg:text-lg shadow hover:bg-red-700 transition-colors focus:ring-4 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-white dark:focus:ring-offset-gray-900">
       Donate
     </a>
   </div>
@@ -65,16 +65,19 @@
 
     // Shrinking navigation on scroll
     function handleNavScroll() {
+      const container = nav.querySelector('.container');
       const scrollY = window.scrollY;
       
       if (scrollY > 100) {
-        nav.classList.add('py-2');
-        nav.classList.remove('py-4');
+        container.classList.add('py-2');
+        container.classList.remove('py-4');
+        nav.classList.add('shadow-lg');
         nav.style.backdropFilter = 'blur(12px)';
         nav.style.background = 'rgba(255, 255, 255, 0.92)';
       } else {
-        nav.classList.add('py-4');
-        nav.classList.remove('py-2');
+        container.classList.add('py-4');
+        container.classList.remove('py-2');
+        nav.classList.remove('shadow-lg');
         nav.style.backdropFilter = 'blur(4px)';
         nav.style.background = 'rgba(255, 255, 255, 0.95)';
       }
