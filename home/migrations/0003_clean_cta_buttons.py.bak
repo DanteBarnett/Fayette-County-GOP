@@ -1,0 +1,30 @@
+from django.db import migrations
+
+
+def clean_cta_buttons(apps, schema_editor):
+    HomePage = apps.get_model("home", "HomePage")
+
+    for page in HomePage.objects.all():
+        updated = False
+        stream_data = page.cta_buttons.raw_text if hasattr(page.cta_buttons, 'raw_text') else page.cta_buttons
+        # Wagtail 6 uses .raw_text attr; but in migrations we can iterate on struct
+        new_blocks = []
+        for block in page.cta_buttons.raw_data:  # type: ignore
+            if block.get("type") == "button":
+                data = block[1]
+                if data.get("link", "") == "":
+                    data["link"] = None
+                    updated = True
+            new_blocks.append(block)
+        if updated:
+            page.cta_buttons = new_blocks  # type: ignore
+            page.save_revision().publish()
+
+class Migration(migrations.Migration):
+    dependencies = [
+        ("home", "0002_events_teaser_count"),
+    ]
+
+    operations = [
+        migrations.RunPython(clean_cta_buttons, migrations.RunPython.noop),
+    ]

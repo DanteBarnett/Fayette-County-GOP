@@ -176,3 +176,13 @@ SECURE_HSTS_SECONDS           = 60 * 60 * 24 * 30  # 30 days
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+from wagtail.blocks.field_block import ChooserBlock
+
+def _safe_bulk_to_python(self, values):
+    """Original bulk_to_python explodes on '' – replace them with None."""
+    cleaned = [v or None for v in values]          # '' -> None
+    objects = self.model_class.objects.in_bulk(cleaned)
+    return [objects.get(v) if v not in ("", None) else None for v in cleaned]
+
+# Patch once at import time
+ChooserBlock.bulk_to_python = _safe_bulk_to_python  # type: ignore

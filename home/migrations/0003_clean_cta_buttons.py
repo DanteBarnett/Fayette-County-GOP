@@ -9,16 +9,16 @@ def clean_cta_buttons(apps, schema_editor):
         stream_data = page.cta_buttons.raw_text if hasattr(page.cta_buttons, 'raw_text') else page.cta_buttons
         # Wagtail 6 uses .raw_text attr; but in migrations we can iterate on struct
         new_blocks = []
-        for block in page.cta_buttons.stream_data:  # type: ignore
-            if block[0] == "button":
-                data = block[1]
+        for block in page.cta_buttons.raw_data:  # type: ignore
+            if block.get("type") == "button":
+                data = block.get("value", {})
                 if data.get("link", "") == "":
                     data["link"] = None
                     updated = True
             new_blocks.append(block)
         if updated:
             page.cta_buttons = new_blocks  # type: ignore
-            page.save_revision().publish()
+            page.save()
 
 class Migration(migrations.Migration):
     dependencies = [
