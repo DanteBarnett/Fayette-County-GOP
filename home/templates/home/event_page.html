@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+<article class="container mx-auto py-16 px-4 max-w-3xl">
+  {% if page.image %}{% image page.image original class="w-full rounded-lg mb-8" %}{% endif %}
+  <h1 class="text-4xl font-bold">{{ page.title }}</h1>
+  <p class="mt-2 text-gray-600">{{ page.start_date|date:"F j, Y g:i A" }}{% if page.end_date %} – {{ page.end_date|date:"F j, Y g:i A" }}{% endif %}</p>
+  <p class="mt-1 font-medium">Location: {{ page.location }}</p>
+  <div class="prose mt-6">{{ page.description|richtext }}</div>
+  {% if page.flyer %}
+    <a href="{{ page.flyer.url }}" class="inline-block mt-6 px-4 py-2 bg-patriotBlue text-white rounded-md">Download Flyer</a>
+  {% endif %}
+  {% if page.cta_link %}
+    <a href="{{ page.cta_link }}" class="inline-block mt-4 px-4 py-2 bg-patriotRed text-white rounded-md">Learn More</a>
+  {% endif %}
+</article>
+{% endblock %}

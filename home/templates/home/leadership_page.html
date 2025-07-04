@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% load wagtailimages_tags snippet_tags %}
+{% get_snippets 'home.Leader' as leaders %}
+{% block content %}
+<section class="container mx-auto py-16 px-4">
+  <h2 class="text-3xl font-bold text-center mb-12">Party Leadership</h2>
+  <div class="grid gap-8 md:grid-cols-3">
+    {% for leader in leaders %}
+      <div class="bg-white shadow rounded-lg p-6 text-center">
+        {% if leader.photo %}{% image leader.photo fill-200x200 class="mx-auto rounded-full" %}{% endif %}
+        <h3 class="mt-4 font-semibold text-lg">{{ leader.name }}</h3>
+        <p class="text-sm text-patriotBlue">{{ leader.role }}</p>
+        <div class="prose mt-2">{{ leader.bio|richtext }}</div>
+        {% if leader.email %}<a href="mailto:{{ leader.email }}" class="text-patriotRed text-sm inline-block mt-3">{{ leader.email }}</a>{% endif %}
+      </div>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}

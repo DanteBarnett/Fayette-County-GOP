@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+
+{% block content %}
+<section class="container mx-auto py-16 px-4 max-w-3xl">
+  <article class="prose lg:prose-xl">
+    {{ page.body|richtext }}
+  </article>
+</section>
+{% endblock %}

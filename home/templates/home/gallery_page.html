@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% load wagtailcore_tags wagtailimages_tags %}
+{% block content %}
+<section class="container mx-auto py-16 px-4">
+  <h2 class="text-3xl font-bold text-center mb-12">Gallery</h2>
+  <div class="columns-1 sm:columns-2 md:columns-3 gap-4 [&>figure]:mb-4">
+    {% for item in page.items.all %}
+    <figure class="break-inside-avoid">
+      {% for block in item.media %}
+        {% if block.block_type == 'image' %}
+          {% image block.value original class="w-full rounded-lg" %}
+        {% elif block.block_type == 'video' %}
+          <div class="aspect-video rounded-lg overflow-hidden mb-2">{{ block.value }}</div>
+        {% endif %}
+      {% endfor %}
+      <figcaption class="text-sm mt-2">{{ item.title }}</figcaption>
+    </figure>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
