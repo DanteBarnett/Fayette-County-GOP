@@ -128,7 +128,12 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 STATICFILES_DIRS = [BASE_DIR / "static"]
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+if DEBUG:
+    # Use simpler storage during development so collectstatic is optional.
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+else:
+    # Use manifest-based storage (with hashed filenames) in production.
+    STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 MEDIA_URL = "/media/"
 MEDIA_ROOT = BASE_DIR / "media"
