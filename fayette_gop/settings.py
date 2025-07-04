@@ -181,3 +181,25 @@ SECURE_HSTS_INCLUDE_SUBDOMAINS = not DEBUG
 SECURE_HSTS_SECONDS = 60 * 60 * 24 * 30  # 30 days
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+# ------------------------------------------------------------------------------
+# Wagtail safety patch: ignore blank IDs in chooser blocks
+# ------------------------------------------------------------------------------
+
+# Some StreamField data (e.g., empty PageChooser or ImageChooser fields) may
+# serialise to an empty string "". Wagtail's default bulk_to_python implementation
+# tries to cast these to integers, causing a ValueError. We monkey-patch the
+# method to filter out blank values while preserving list ordering.
+
+from wagtail.blocks.field_block import ChooserBlock  # noqa: E402
+
+
+def _safe_bulk_to_python(self, values):
+    # Preserve ordering and None entries, but skip blanks
+    cleaned_values = [v for v in values if v not in ("", None)]
+    objects = self.model_class.objects.in_bulk(cleaned_values)
+    return [objects.get(v) if v not in ("", None) else None for v in values]
+
+
+# Apply the patch once at import time
+ChooserBlock.bulk_to_python = _safe_bulk_to_python  # type: ignore[misc]
