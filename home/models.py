@@ -91,7 +91,7 @@ class HomePage(Page):
 
     subpage_types = [
         "home.VolunteerPage",
-        "home.EventsIndexPage",
+        "home.EventIndexPage",
         "home.DonateRedirectPage",
         "home.NewsletterSignupPage",
         "home.StandardPage",
@@ -120,7 +120,7 @@ class StandardPage(Page):
 # ──────────────────────────────────────────────────────────────────────────────
 # 4 – EVENTS
 # ──────────────────────────────────────────────────────────────────────────────
-class EventsIndexPage(Page):
+class EventIndexPage(Page):
     intro = RichTextField(blank=True)
     content_panels = Page.content_panels + [FieldPanel("intro")]
     parent_page_types = ["home.HomePage"]
@@ -151,7 +151,7 @@ class EventPage(Page):
         FieldPanel("cta_link"),
     ]
 
-    parent_page_types = ["home.EventsIndexPage"]
+    parent_page_types = ["home.EventIndexPage"]
 
 
 # ──────────────────────────────────────────────────────────────────────────────
