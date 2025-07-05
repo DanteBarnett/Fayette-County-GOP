@@ -9,6 +9,10 @@ export default {
   theme: {
     extend: {
       colors: {
+        primary: '#C61D23',
+        gold:   '#E8C547',
+        sand:   '#F4F1EA',
+        sky:    '#E7F1FF',
         navy: {
           50: '#eef2ff',
           100: '#e0e7ff',
@@ -19,8 +23,8 @@ export default {
           600: '#4f46e5',
           700: '#4338ca',
           800: '#3730a3',
-          900: '#1e3a8a',
-          950: '#172554'
+          900: '#0D1B2A',
+          950: '#172554',
         },
         patriot: {
           red: '#dc2626',
@@ -32,8 +36,9 @@ export default {
         patriotBlue: '#1e3a8a',
       },
       fontFamily: {
+        display: ['"Fugaz One"', 'cursive'],
         serif: ['Merriweather', 'Georgia', 'serif'],
-        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+        sans: ['Inter', 'ui-sans-serif', 'system-ui'],
         // Legacy support
         montserrat: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
       },
