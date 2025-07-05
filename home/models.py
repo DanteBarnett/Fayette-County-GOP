@@ -308,3 +308,13 @@ class ContactPage(AbstractEmailForm):
         context["form"]  = self.get_form(request.POST or None)
         return context
 
+
+# ──────────────────────────────────────────────────────────────────────────────
+# 12 – ABOUT PAGE
+# ──────────────────────────────────────────────────────────────────────────────
+class AboutPage(StandardPage):
+    """Simple rich-text About page accessible at /about/."""
+    template = "home/standard_page.html"
+    parent_page_types = ["home.HomePage"]
+    subpage_types = []
+
