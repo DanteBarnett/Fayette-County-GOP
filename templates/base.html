@@ -63,9 +63,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
 
-    <!-- PWA manifest -->
-    <link rel="manifest" href="{% static 'manifest.json' %}" />
-
     {% if GA_ID %}
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id={{ GA_ID }}"></script>
@@ -225,16 +222,6 @@
     </main>
 
     {% include 'partials/footer.html' %}
-
-    <!-- React bundle (Vite build) -->
-    <script type="module" src="{% static 'frontend/assets/index.js' %}"></script>
-
-    <!-- Register service worker for offline support -->
-    <script>
-      if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register("{% url 'service-worker' %}");
-      }
-    </script>
 
     <!-- Loading and CTA Script -->
     <script>

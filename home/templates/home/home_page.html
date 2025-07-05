@@ -13,8 +13,8 @@
       <source srcset="{{ hero_img.url }}?w=1280" media="(min-width: 768px)" />
       <img src="{{ hero_img.url }}?w=768" alt="{{ hero_img.alt }}" class="w-full h-full object-cover" loading="lazy" />
     {% else %}
-      <source srcset="{% static 'img/hero@2x.jpg' %}" media="(min-width: 1280px)" />
-      <img src="{% static 'img/hero.jpg' %}" alt="" class="w-full h-full object-cover" loading="lazy" />
+      <source srcset="https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1920&q=60" media="(min-width: 1280px)" />
+      <img src="https://images.unsplash.com/photo-1503264116251-35a269479413?auto=format&fit=crop&w=1280&q=60" alt="Stars and stripes waving" class="w-full h-full object-cover" loading="lazy" />
     {% endif %}
   </picture>
 

@@ -23,23 +23,6 @@ urlpatterns = [
     # Wagtail documents
     path("documents/", include(wagtail_docs_urls)),
 
-    # PWA assets
-    path(
-        "manifest.json",
-        TemplateView.as_view(
-            template_name="manifest.json",
-            content_type="application/manifest+json",
-        ),
-    ),
-    re_path(
-        r"^service-worker\.js$",
-        TemplateView.as_view(
-            template_name="service-worker.js",
-            content_type="application/javascript",
-        ),
-        name="service-worker",
-    ),
-
     # RSS feed
     path("blog/rss.xml", LatestPostsFeed(), name="rss_feed"),
 
