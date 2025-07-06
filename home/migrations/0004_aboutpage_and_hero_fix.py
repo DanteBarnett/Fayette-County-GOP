@@ -1,4 +1,5 @@
 from django.db import migrations
+from wagtail.models import Page
 
 
 def forwards(apps, schema_editor):
@@ -30,8 +31,10 @@ def forwards(apps, schema_editor):
     # -------------------------------------------------------------------------
     #  A)  Ensure an "About" child page exists under the site's HomePage
     # -------------------------------------------------------------------------
-    home_root = HomePage.objects.first()
-    if home_root and not home_root.get_children().filter(slug="about").exists():
+    # Need to fetch using the *real* Page manager because the historical
+    # HomePage model used here lacks helper methods like ``get_children``.
+    home_root = Page.objects.type(HomePage).first()
+    if home_root and not Page.objects.child_of(home_root).filter(slug="about").exists():
         about_page = AboutPage(
             title="About",
             slug="about",
