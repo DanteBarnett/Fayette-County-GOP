@@ -4,18 +4,60 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="{% block meta_description %}Fayette County Republican Party - Defending conservative values and building a stronger future for Fayette County families through faith, freedom, and community engagement.{% endblock %}" />
+    <meta name="keywords" content="{% block meta_keywords %}Fayette County, Republican Party, GOP, conservative, politics, Georgia, Fayetteville, community, values{% endblock %}" />
+    <meta name="author" content="Fayette County Republican Party" />
+    <meta name="robots" content="index, follow" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="og:title" content="{% block og_title %}Fayette County GOP{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}Defending conservative values and building a stronger future for Fayette County families.{% endblock %}" />
+    <meta property="og:image" content="{% block og_image %}{% static 'img/og-image.jpg' %}{% endblock %}" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="{{ request.build_absolute_uri }}" />
+    <meta property="twitter:title" content="{% block twitter_title %}Fayette County GOP{% endblock %}" />
+    <meta property="twitter:description" content="{% block twitter_description %}Defending conservative values and building a stronger future for Fayette County families.{% endblock %}" />
+    <meta property="twitter:image" content="{% block twitter_image %}{% static 'img/og-image.jpg' %}{% endblock %}" />
+    
     <title>{% block title %}Fayette County GOP{% endblock %}</title>
+    
+    <!-- Favicons -->
     <link rel="shortcut icon" href="{% static 'img/favicon.ico' %}" />
+    <link rel="icon" type="image/png" sizes="32x32" href="{% static 'img/favicon-32x32.png' %}" />
+    <link rel="icon" type="image/png" sizes="16x16" href="{% static 'img/favicon-16x16.png' %}" />
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'img/apple-touch-icon.png' %}" />
+    
+    <!-- Preconnect to external domains -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <link href="{% static 'dist/tailwind.css' %}" rel="stylesheet" />
-    <link rel="manifest" href="{% static 'manifest.json' %}" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     
-    <!-- GSAP CDN -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/SplitText.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+    <!-- Preload critical fonts -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    
+    <!-- Fallback for browsers that don't support preload -->
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+      <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&display=swap" rel="stylesheet">
+    </noscript>
+    
+    <!-- Critical CSS -->
+    <link href="{% static 'dist/tailwind.css' %}" rel="stylesheet" />
+    
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="{% static 'manifest.json' %}" />
+    <meta name="theme-color" content="#1e3a8a" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Fayette County GOP" />
+    
+    <!-- Preload critical scripts -->
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js" as="script" />
     
     {% if GA_ID %}
     <!-- Google Analytics -->
@@ -27,8 +69,9 @@
     </script>
     {% endif %}
 
+    <!-- Critical CSS for loading and accessibility -->
     <style>
-      /* Loading Screen Styles */
+      /* Critical styles for loading screen and accessibility */
       .loading-screen {
         position: fixed;
         top: 0;
@@ -59,6 +102,7 @@
         font-family: 'Merriweather', serif;
         font-size: 2rem;
         font-weight: 700;
+        animation: fadeInUp 0.8s ease-out;
       }
 
       .county-outline {
@@ -68,6 +112,7 @@
         border-radius: 8px;
         position: relative;
         overflow: hidden;
+        animation: scaleIn 0.6s ease-out;
       }
 
       .flag-stripes {
@@ -112,6 +157,16 @@
         100% { transform: rotate(360deg); }
       }
 
+      @keyframes fadeInUp {
+        from { opacity: 0; transform: translateY(30px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
+      @keyframes scaleIn {
+        from { opacity: 0; transform: scale(0.8); }
+        to { opacity: 1; transform: scale(1); }
+      }
+
       /* Sticky CTA Styles */
       .sticky-cta {
         position: fixed;
@@ -127,11 +182,66 @@
         transform: translateY(0);
         opacity: 1;
       }
+
+      /* Accessibility improvements */
+      .keyboard-nav *:focus {
+        outline: 2px solid #dc2626 !important;
+        outline-offset: 2px !important;
+      }
+
+      /* Reduced motion support */
+      @media (prefers-reduced-motion: reduce) {
+        .loading-screen {
+          transition: none;
+        }
+        
+        .logo-reveal,
+        .county-outline,
+        .spinner {
+          animation: none;
+        }
+        
+        * {
+          animation-duration: 0.01ms !important;
+          animation-iteration-count: 1 !important;
+          transition-duration: 0.01ms !important;
+        }
+      }
+
+      /* High contrast mode support */
+      @media (prefers-contrast: high) {
+        .county-outline {
+          border-width: 4px;
+        }
+        
+        .logo-reveal {
+          text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+      }
+
+      /* Print styles */
+      @media print {
+        .loading-screen,
+        .sticky-cta,
+        nav,
+        .no-print {
+          display: none !important;
+        }
+        
+        body {
+          font-size: 12pt;
+          line-height: 1.4;
+          color: black;
+          background: white;
+        }
+      }
     </style>
+    
+    {% block extra_css %}{% endblock %}
   </head>
   <body class="font-sans antialiased text-gray-900 bg-white">
     <!-- Loading Screen -->
-    <div id="loading-screen" class="loading-screen">
+    <div id="loading-screen" class="loading-screen" aria-hidden="true">
       <div class="logo-reveal">
         <div class="county-outline">
           <div class="flag-stripes"></div>
@@ -139,7 +249,7 @@
         </div>
         <span>Fayette County GOP</span>
       </div>
-      <div class="spinner"></div>
+      <div class="spinner" role="status" aria-label="Loading"></div>
     </div>
 
     <!-- Skip to content for accessibility -->
@@ -149,17 +259,17 @@
     {% include "partials/nav.html" %}
 
     <!-- Main Content -->
-    <main id="content" tabindex="-1">
+    <main id="content" tabindex="-1" role="main">
       {% block content %}{% endblock %}
     </main>
 
     <!-- Sticky CTA Pills -->
-    <div id="sticky-cta" class="sticky-cta">
+    <div id="sticky-cta" class="sticky-cta no-print" aria-label="Quick actions">
       <div class="flex gap-3 bg-white/95 backdrop-blur-sm border border-gray-200 rounded-full px-6 py-3 shadow-lg">
-        <a href="/contribute/" class="bg-patriot-red text-white px-6 py-2 rounded-full font-semibold hover:bg-red-700 transition-colors focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+        <a href="/contribute/" class="bg-patriot-red text-white px-6 py-2 rounded-full font-semibold hover:bg-red-700 transition-colors focus:ring-2 focus:ring-red-500 focus:ring-offset-2" aria-label="Contribute to Fayette County GOP">
           Contribute
         </a>
-        <a href="/volunteer/" class="border-2 border-patriot-red text-patriot-red px-6 py-2 rounded-full font-semibold hover:bg-patriot-red hover:text-white transition-colors focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+        <a href="/volunteer/" class="border-2 border-patriot-red text-patriot-red px-6 py-2 rounded-full font-semibold hover:bg-patriot-red hover:text-white transition-colors focus:ring-2 focus:ring-red-500 focus:ring-offset-2" aria-label="Volunteer with Fayette County GOP">
           Volunteer
         </a>
       </div>
@@ -168,47 +278,56 @@
     <!-- Footer -->
     {% include "partials/footer.html" %}
 
-    <!-- Scripts -->
-    <script type="module" src="{% static 'frontend/assets/index.js' %}"></script>
-    <script src="{% static 'js/main.js' %}"></script>
+    <!-- Scripts - loaded asynchronously for performance -->
+    <script>
+      // Critical JavaScript for loading screen
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadingScreen = document.getElementById('loading-screen');
+        
+        // Hide loading screen after minimum time or when page is fully loaded
+        const hideLoading = () => {
+          if (loadingScreen) {
+            loadingScreen.classList.add('hidden');
+            loadingScreen.setAttribute('aria-hidden', 'true');
+          }
+        };
+        
+        // Ensure minimum loading time for smooth UX
+        setTimeout(hideLoading, 1000);
+        
+        // Also hide when window is fully loaded
+        if (document.readyState === 'complete') {
+          setTimeout(hideLoading, 500);
+        } else {
+          window.addEventListener('load', () => setTimeout(hideLoading, 500));
+        }
+      });
+    </script>
     
-    <!-- Service Worker -->
+    <!-- Load non-critical scripts asynchronously -->
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/gsap.min.js"></script>
+    <script async src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.4/ScrollTrigger.min.js"></script>
+    <script defer src="{% static 'js/main.js' %}"></script>
+    
+    {% if 'frontend' in INSTALLED_APPS %}
+    <script type="module" src="{% static 'frontend/assets/index.js' %}" defer></script>
+    {% endif %}
+    
+    <!-- Service Worker for PWA -->
     <script>
       if ('serviceWorker' in navigator) {
-        navigator.serviceWorker.register('/static/serviceworker.js');
+        window.addEventListener('load', function() {
+          navigator.serviceWorker.register('/static/serviceworker.js')
+            .then(function(registration) {
+              console.log('SW registered: ', registration);
+            })
+            .catch(function(registrationError) {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
       }
     </script>
 
-    <!-- Loading and CTA Script -->
-    <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const loadingScreen = document.getElementById('loading-screen');
-        const stickyCTA = document.getElementById('sticky-cta');
-        let heroSection = document.querySelector('.hero-section');
-        let ctaButtons = document.querySelectorAll('.hero-cta');
-
-        // Hide loading screen after 1 second
-        setTimeout(() => {
-          loadingScreen.classList.add('hidden');
-        }, 1000);
-
-        // Sticky CTA functionality
-        function handleScroll() {
-          const scrollY = window.scrollY;
-          
-          if (scrollY > 400) {
-            stickyCTA.classList.add('show');
-            // Hide original CTAs
-            ctaButtons.forEach(btn => btn.style.opacity = '0.5');
-          } else {
-            stickyCTA.classList.remove('show');
-            // Show original CTAs
-            ctaButtons.forEach(btn => btn.style.opacity = '1');
-          }
-        }
-
-        window.addEventListener('scroll', handleScroll);
-      });
-    </script>
+    {% block extra_js %}{% endblock %}
   </body>
 </html>

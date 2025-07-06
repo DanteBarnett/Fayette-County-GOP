@@ -1,20 +1,115 @@
 {
   "name": "Fayette County Republican Party",
   "short_name": "Fayette GOP",
+  "description": "Defending conservative values and building a stronger future for Fayette County families.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#FFFFFF",
-  "theme_color": "#002B5C",
+  "background_color": "#1e3a8a",
+  "theme_color": "#1e3a8a",
+  "orientation": "portrait-primary",
+  "categories": ["politics", "government", "community"],
+  "lang": "en-US",
+  "dir": "ltr",
   "icons": [
     {
-      "src": "/static/img/icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png"
+      "src": "/static/img/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "maskable any"
     },
     {
-      "src": "/static/img/icon-512.png",
+      "src": "/static/img/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/static/img/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/static/img/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/static/img/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/static/img/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/static/img/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "/static/img/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "maskable any"
     }
-  ]
+  ],
+  "shortcuts": [
+    {
+      "name": "Contribute",
+      "short_name": "Donate",
+      "description": "Make a contribution to support our cause",
+      "url": "/contribute/",
+      "icons": [
+        {
+          "src": "/static/img/shortcut-contribute.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Volunteer",
+      "short_name": "Volunteer",
+      "description": "Join our volunteer team",
+      "url": "/volunteer/",
+      "icons": [
+        {
+          "src": "/static/img/shortcut-volunteer.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Events",
+      "short_name": "Events",
+      "description": "View upcoming events",
+      "url": "/events/",
+      "icons": [
+        {
+          "src": "/static/img/shortcut-events.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Contact",
+      "short_name": "Contact",
+      "description": "Get in touch with us",
+      "url": "/contact/",
+      "icons": [
+        {
+          "src": "/static/img/shortcut-contact.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "scope": "/",
+  "prefer_related_applications": false
 }

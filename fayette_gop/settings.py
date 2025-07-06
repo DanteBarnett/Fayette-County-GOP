@@ -19,8 +19,8 @@ env.read_env(BASE_DIR / ".env")  # ignore if .env missing
 # ──────────────────────────────────────────────
 # Core
 # ──────────────────────────────────────────────
-DEBUG       = env.bool("DJANGO_DEBUG", default=True)
-SECRET_KEY  = env("DJANGO_SECRET_KEY", default="change-me-in-prod")
+DEBUG       = env.bool("DJANGO_DEBUG", default=True)  # type: ignore
+SECRET_KEY  = env("DJANGO_SECRET_KEY", default="change-me-in-prod")  # type: ignore
 ALLOWED_HOSTS = env.list("ALLOWED_HOSTS")
 
 # ──────────────────────────────────────────────
@@ -101,7 +101,7 @@ TEMPLATES = [
 DATABASES = {
     "default": env.db(
         "DATABASE_URL",
-        default=f"sqlite:///{BASE_DIR/'db.sqlite3'}",
+        default=f"sqlite:///{BASE_DIR/'db.sqlite3'}",  # type: ignore
     )
 }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
@@ -132,7 +132,7 @@ MEDIA_ROOT = BASE_DIR / "media"
 # ──────────────────────────────────────────────
 WAGTAIL_SITE_NAME = "Fayette GOP"
 WAGTAILADMIN_BASE_URL = env(
-    "WAGTAILADMIN_BASE_URL", default="http://localhost:8000"
+    "WAGTAILADMIN_BASE_URL", default="http://localhost:8000"  # type: ignore
 )
 
 # ──────────────────────────────────────────────
@@ -149,7 +149,7 @@ else:
 # ──────────────────────────────────────────────
 # Google Analytics (optional)
 # ──────────────────────────────────────────────
-GA_ID = env("GA_ID", default="")
+GA_ID = env("GA_ID", default="")  # type: ignore
 
 # ──────────────────────────────────────────────
 # PWA config (django-pwa)
@@ -165,7 +165,7 @@ PWA_SERVICE_WORKER_PATH = BASE_DIR / "static" / "service-worker.js"
 # ──────────────────────────────────────────────
 # Security
 # ──────────────────────────────────────────────
-CSRF_TRUSTED_ORIGINS   = env.list("CSRF_TRUSTED_ORIGINS", default=[])
+CSRF_TRUSTED_ORIGINS   = env.list("CSRF_TRUSTED_ORIGINS", default=[])  # type: ignore
 SESSION_COOKIE_SECURE  = not DEBUG
 CSRF_COOKIE_SECURE     = not DEBUG
 SECURE_BROWSER_XSS_FILTER      = True

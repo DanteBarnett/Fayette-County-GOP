@@ -1,107 +1,190 @@
 {% load static wagtailcore_tags %}
 
-<!-- Mega Footer -->
+<!-- Enhanced Footer -->
 <footer class="bg-navy-950 text-white">
-  <div class="container mx-auto px-6 py-16">
+  <div class="container-wide section-padding">
     <!-- Main Footer Content -->
     <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-12 mb-12">
       
       <!-- Organization Info -->
-      <div class="lg:col-span-1">
-        <div class="space-y-6">
-          <div>
-            <h3 class="text-2xl font-serif font-bold mb-4">Fayette County GOP</h3>
-            <p class="text-gray-300 leading-relaxed">
-              Defending conservative values and building a stronger future for Fayette County families.
-            </p>
-          </div>
-          
-          <!-- Social Media Links -->
-          <div>
-            <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
-            <div class="flex space-x-4">
-              <a href="#" class="bg-white/10 hover:bg-patriot-red text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-navy-950" aria-label="Facebook">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                </svg>
-              </a>
-              <a href="#" class="bg-white/10 hover:bg-patriot-red text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-navy-950" aria-label="Twitter">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-                </svg>
-              </a>
-              <a href="#" class="bg-white/10 hover:bg-patriot-red text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-navy-950" aria-label="Instagram">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323C6.001 8.198 7.152 7.708 8.449 7.708s2.448.49 3.323 1.416c.876.876 1.418 2.027 1.418 3.323s-.542 2.447-1.418 3.323c-.875.807-2.026 1.218-3.323 1.218zm7.718-4.541c0-1.297-.49-2.448-1.297-3.323-.876-.876-2.027-1.418-3.323-1.418s-2.447.542-3.323 1.418c-.807.875-1.297 2.026-1.297 3.323 0 1.297.49 2.447 1.297 3.323.876.876 2.027 1.297 3.323 1.297s2.447-.421 3.323-1.297c.807-.876 1.297-2.026 1.297-3.323z"/>
-                </svg>
-              </a>
-              <a href="#" class="bg-white/10 hover:bg-patriot-red text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-navy-950" aria-label="YouTube">
-                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-                  <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-                </svg>
-              </a>
+      <div class="lg:col-span-1 space-y-6">
+        <div>
+          <div class="flex items-center space-x-3 mb-4">
+            <div class="w-10 h-10 bg-gradient-to-br from-patriot-red to-red-700 rounded-lg flex items-center justify-center">
+              <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+              </svg>
             </div>
+            <h3 class="text-2xl font-serif font-bold">Fayette County GOP</h3>
+          </div>
+          <p class="text-gray-300 leading-relaxed">
+            Defending conservative values and building a stronger future for Fayette County families.
+          </p>
+        </div>
+        
+        <!-- Social Media Links -->
+        <div>
+          <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
+          <div class="flex space-x-3">
+            <a href="#" class="social-link" aria-label="Facebook">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Twitter">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="Instagram">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M12.017 0C5.396 0 .029 5.367.029 11.987c0 6.62 5.367 11.987 11.988 11.987 6.62 0 11.987-5.367 11.987-11.987C24.014 5.367 18.637.001 12.017.001zM8.449 16.988c-1.297 0-2.448-.49-3.323-1.297C4.198 14.895 3.708 13.744 3.708 12.447s.49-2.448 1.418-3.323C6.001 8.198 7.152 7.708 8.449 7.708s2.448.49 3.323 1.416c.876.876 1.418 2.027 1.418 3.323s-.542 2.447-1.418 3.323c-.875.807-2.026 1.218-3.323 1.218zm7.718-4.541c0-1.297-.49-2.448-1.297-3.323-.876-.876-2.027-1.418-3.323-1.418s-2.447.542-3.323 1.418c-.807.875-1.297 2.026-1.297 3.323 0 1.297.49 2.447 1.297 3.323.876.876 2.027 1.297 3.323 1.297s2.447-.421 3.323-1.297c.807-.876 1.297-2.026 1.297-3.323z"/>
+              </svg>
+            </a>
+            <a href="#" class="social-link" aria-label="YouTube">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+              </svg>
+            </a>
           </div>
         </div>
       </div>
       
       <!-- Quick Links -->
       <div>
-        <h4 class="text-lg font-semibold mb-6">Get Involved</h4>
+        <h4 class="text-lg font-semibold mb-6 text-white">Get Involved</h4>
         <ul class="space-y-3">
-          <li><a href="/volunteer/" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">Volunteer</a></li>
-          <li><a href="/contribute/" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">Donate</a></li>
-          <li><a href="/membership/" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">Become a Member</a></li>
-          <li><a href="/events/" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">Upcoming Events</a></li>
-          <li><a href="/newsletter/" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">Newsletter</a></li>
+          <li><a href="/volunteer/" class="footer-link">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+            </svg>
+            Volunteer
+          </a></li>
+          <li><a href="/contribute/" class="footer-link">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M3.172 5.172a4 4 0 015.656 0L10 6.343l1.172-1.171a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+            </svg>
+            Donate
+          </a></li>
+          <li><a href="/membership/" class="footer-link">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
+            </svg>
+            Become a Member
+          </a></li>
+          <li><a href="/events/" class="footer-link">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+            </svg>
+            Upcoming Events
+          </a></li>
+          <li><a href="/newsletter/" class="footer-link">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+              <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+            </svg>
+            Newsletter
+          </a></li>
         </ul>
       </div>
       
       <!-- Information -->
       <div>
-        <h4 class="text-lg font-semibold mb-6">Information</h4>
+        <h4 class="text-lg font-semibold mb-6 text-white">Information</h4>
         <ul class="space-y-3">
-          <li><a href="/about/" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">About Us</a></li>
-          <li><a href="/leadership/" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">Leadership</a></li>
-          <li><a href="/platform/" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">Our Platform</a></li>
-          <li><a href="/news/" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">News & Updates</a></li>
-          <li><a href="/resources/" class="text-gray-300 hover:text-white transition-colors focus:text-white focus:outline-none">Resources</a></li>
+          <li><a href="/about/" class="footer-link">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd" />
+            </svg>
+            About Us
+          </a></li>
+          <li><a href="/leadership/" class="footer-link">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3z" />
+            </svg>
+            Leadership
+          </a></li>
+          <li><a href="/platform/" class="footer-link">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+            </svg>
+            Our Platform
+          </a></li>
+          <li><a href="/news/" class="footer-link">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clip-rule="evenodd" />
+            </svg>
+            News & Updates
+          </a></li>
+          <li><a href="/resources/" class="footer-link">
+            <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+              <path fill-rule="evenodd" d="M3 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm0 4a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z" clip-rule="evenodd" />
+            </svg>
+            Resources
+          </a></li>
         </ul>
       </div>
       
-      <!-- Contact & Support -->
+      <!-- Contact & Newsletter -->
       <div>
-        <h4 class="text-lg font-semibold mb-6">Contact</h4>
-        <div class="space-y-4">
+        <h4 class="text-lg font-semibold mb-6 text-white">Contact</h4>
+        <div class="space-y-6">
           <div>
-            <h5 class="font-medium mb-2">Office</h5>
-            <address class="text-gray-300 not-italic">
-              123 Main Street<br>
-              Fayetteville, GA 30214<br>
-              <a href="tel:+17705551234" class="hover:text-white transition-colors">(770) 555-1234</a>
+            <h5 class="font-medium mb-3 text-gray-200">Office</h5>
+            <address class="text-gray-300 not-italic space-y-1">
+              <div class="flex items-start space-x-2">
+                <svg class="w-4 h-4 mt-1 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                </svg>
+                <div>
+                  123 Main Street<br>
+                  Fayetteville, GA 30214
+                </div>
+              </div>
+              <div class="flex items-center space-x-2">
+                <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                  <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
+                </svg>
+                <a href="tel:+17705551234" class="hover:text-white transition-colors">(770) 555-1234</a>
+              </div>
             </address>
           </div>
+          
           <div>
-            <h5 class="font-medium mb-2">Email</h5>
-            <a href="mailto:info@fayettecountygop.org" class="text-gray-300 hover:text-white transition-colors">info@fayettecountygop.org</a>
+            <h5 class="font-medium mb-3 text-gray-200">Email</h5>
+            <div class="flex items-center space-x-2">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+              </svg>
+              <a href="mailto:info@fayettecountygop.org" class="text-gray-300 hover:text-white transition-colors">info@fayettecountygop.org</a>
+            </div>
           </div>
         </div>
         
         <!-- Newsletter Signup -->
-        <div class="mt-6">
-          <h5 class="font-medium mb-3">Stay Informed</h5>
-          <form class="flex flex-col space-y-3" action="/newsletter/signup/" method="post">
+        <div class="mt-8">
+          <h5 class="font-medium mb-4 text-gray-200">Stay Informed</h5>
+          <form class="space-y-3" action="/newsletter/signup/" method="post">
             {% csrf_token %}
-            <input 
-              type="email" 
-              placeholder="Enter your email" 
-              required
-              class="bg-white/10 border border-white/20 rounded-lg px-4 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-patriot-red focus:border-transparent"
-            >
+            <div class="relative">
+              <input 
+                type="email" 
+                placeholder="Enter your email" 
+                required
+                class="form-input bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-patriot-red focus:border-patriot-red w-full"
+                aria-label="Email address for newsletter"
+              >
+            </div>
             <button 
               type="submit"
-              class="bg-patriot-red text-white px-4 py-2 rounded-lg font-medium hover:bg-red-700 transition-colors focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:ring-offset-navy-950"
+              class="btn btn-primary w-full justify-center"
+              aria-label="Subscribe to newsletter"
             >
+              <svg class="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z" />
+                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
+              </svg>
               Subscribe
             </button>
           </form>
@@ -111,14 +194,14 @@
     
     <!-- Bottom Footer -->
     <div class="border-t border-white/20 pt-8">
-      <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
+      <div class="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
         <!-- Copyright -->
         <div class="text-gray-400 text-sm">
           <p>&copy; {% now "Y" %} Fayette County Republican Party. All rights reserved.</p>
         </div>
         
         <!-- Legal Links -->
-        <div class="flex flex-wrap items-center space-x-6 text-sm">
+        <div class="flex flex-wrap items-center justify-center gap-6 text-sm">
           <a href="/privacy/" class="text-gray-400 hover:text-white transition-colors">Privacy Policy</a>
           <a href="/terms/" class="text-gray-400 hover:text-white transition-colors">Terms of Service</a>
           <a href="/accessibility/" class="text-gray-400 hover:text-white transition-colors">Accessibility</a>
@@ -127,12 +210,12 @@
       </div>
       
       <!-- Disclaimer -->
-      <div class="mt-6 pt-6 border-t border-white/10">
-        <div class="text-gray-400 text-xs leading-relaxed">
-          <p class="mb-2">
-            <strong>Disclaimer:</strong> The Fayette County Republican Party is a political organization dedicated to promoting conservative principles and supporting Republican candidates. 
+      <div class="mt-8 pt-6 border-t border-white/10">
+        <div class="text-gray-400 text-xs leading-relaxed space-y-2">
+          <p>
+            <strong class="text-gray-300">Disclaimer:</strong> The Fayette County Republican Party is a political organization dedicated to promoting conservative principles and supporting Republican candidates. 
           </p>
-          <p class="mb-2">
+          <p>
             Paid for by the Fayette County Republican Party. Not authorized by any candidate or candidate's committee.
           </p>
           <p>
@@ -143,3 +226,38 @@
     </div>
   </div>
 </footer>
+
+<style>
+/* Enhanced Footer Styles */
+.social-link {
+  @apply bg-white/10 hover:bg-patriot-red text-white w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-navy-950 hover:scale-110;
+}
+
+.footer-link {
+  @apply flex items-center space-x-2 text-gray-300 hover:text-white transition-colors duration-200 focus:text-white focus:outline-none;
+}
+
+.footer-link svg {
+  @apply flex-shrink-0 text-gray-400 group-hover:text-patriot-red transition-colors;
+}
+
+.footer-link:hover svg {
+  @apply text-patriot-red;
+}
+
+/* Newsletter form enhancements */
+.form-input:focus {
+  @apply bg-white/20;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .footer-link {
+    @apply text-base py-1;
+  }
+  
+  .social-link {
+    @apply w-12 h-12;
+  }
+}
+</style>
